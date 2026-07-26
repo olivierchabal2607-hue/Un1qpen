@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f6f4ef; --ink: #151515; --muted: #66645e; --line: #d9d7d1;
+  --navy: #182b3a; --clay: #a46f52; --white: #fff; --radius: 1.25rem;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans), sans-serif; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--clay); color: white; }
+:focus-visible { outline: 3px solid var(--clay); outline-offset: 4px; }
+.container { width: min(100% - 2rem, 1280px); margin-inline: auto; }
+.section { padding-block: clamp(5rem, 10vw, 9rem); }
+.eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: .7rem; font-weight: 700; color: var(--clay); }
+.display { font-family: var(--font-display), sans-serif; font-size: clamp(2.8rem, 7vw, 7rem); line-height: .95; letter-spacing: -.055em; }
+.h2 { font-family: var(--font-display), sans-serif; font-size: clamp(2.2rem, 5vw, 4.8rem); line-height: 1; letter-spacing: -.045em; }
+.copy { color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.7; }
+.grid-texture { background-image: linear-gradient(#ffffff0a 1px, transparent 1px), linear-gradient(90deg,#ffffff0a 1px,transparent 1px); background-size: 42px 42px; }
+.pen { position: relative; width: min(88vw, 760px); height: 68px; border-radius: 38px 12px 12px 38px; background: linear-gradient(135deg,#c68a67,#85523b); box-shadow: 0 30px 80px #0005; transform: rotate(-8deg); }
+.pen:after { content:""; position:absolute; right:-100px; top:24px; border-left:105px solid #d8d7d1; border-top:10px solid transparent; border-bottom:10px solid transparent; }
+.pen-clip { position:absolute; right:50px; top:-12px; width:130px; height:15px; border-radius:10px; background:#172a39; transform:rotate(2deg); }
+.pen-copy { position:absolute; inset:0; display:grid; place-items:center; font-size:12px; letter-spacing:.12em; color:white; }
+@media (max-width: 800px) { .desktop-nav { display:none!important; } .section { padding-block: 4.5rem; } }
+@media (min-width: 801px) { .mobile-toggle { display:none!important; } }
+@media (prefers-reduced-motion: reduce) { *,*:before,*:after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; } }
