@@ -25,7 +25,7 @@ export function LogoTransformControls({
 }) {
   return <div className="grid gap-5">
     <label className="text-sm font-semibold">Taille du logo
-      <input className="mt-3 w-full accent-[#17486a]" type="range" min=".45" max="1.5" step=".05" value={scale} onChange={event => onScaleChange(Number(event.target.value))}/>
+      <input className="mt-3 w-full accent-[#17486a]" type="range" min=".45" max="5" step=".05" value={scale} onChange={event => onScaleChange(Number(event.target.value))}/>
     </label>
     <label className="text-sm font-semibold">Rotation du logo <span className="font-normal text-[#6e6e73]">({rotation}°)</span>
       <input aria-label="Rotation du logo" className="mt-3 w-full accent-[#17486a]" type="range" min="-180" max="180" step="1" value={rotation} onChange={event => onRotationChange(Number(event.target.value))}/>

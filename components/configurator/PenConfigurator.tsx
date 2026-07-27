@@ -77,12 +77,15 @@ export function PenConfigurator() {
         const zoneY = zone.y / 100 * canvas.height;
         const zoneWidth = zone.width / 100 * canvas.width;
         const zoneHeight = zone.height / 100 * canvas.height;
-        const width = Math.min(zoneWidth * .95, zoneWidth * .62 * state.logoScale);
-        const height = Math.min(zoneHeight * .95, width * (logo.height / logo.width));
+        const width = Math.min(zoneWidth * 3.1, zoneWidth * .62 * state.logoScale);
+        const height = Math.min(zoneHeight * 3.1, width * (logo.height / logo.width));
         context.globalAlpha = .92;
         const centerX = zoneX + state.logoPosition.x * zoneWidth;
         const centerY = zoneY + state.logoPosition.y * zoneHeight;
         context.save();
+        context.beginPath();
+        context.rect(zoneX, zoneY, zoneWidth, zoneHeight);
+        context.clip();
         context.translate(centerX, centerY);
         context.rotate(state.logoRotation * Math.PI / 180);
         context.drawImage(logo, -width / 2, -height / 2, width, height);

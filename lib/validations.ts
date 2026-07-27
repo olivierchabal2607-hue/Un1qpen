@@ -20,7 +20,7 @@ export const quoteConfigurationSchema = z.object({
   markingColor: z.enum(["white", "warmGrey", "black"]),
   markingLocation: z.enum(["clip", "body", "both"]),
   activeView: z.enum(["view1", "view2", "view3", "view4", "view5", "view6"]),
-  logoScale: z.number().min(.45).max(1.5),
+  logoScale: z.number().min(.45).max(5),
   logoRotation: z.number().min(-180).max(180),
   logoPosition: z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }),
   preserveRatio: z.boolean(),
