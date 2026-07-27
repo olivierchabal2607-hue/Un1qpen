@@ -72,24 +72,29 @@ export function PenConfigurator() {
       context.drawImage(pen, (canvas.width - drawWidth) / 2, (canvas.height - drawHeight) / 2, drawWidth, drawHeight);
       if (state.uploadedLogo?.previewUrl) {
         const logo = await loadImage(state.uploadedLogo.previewUrl);
-        const zone = printZones[state.penColor][state.activeView][state.markingLocation === "body" ? "body" : "clip"];
-        const zoneX = zone.x / 100 * canvas.width;
-        const zoneY = zone.y / 100 * canvas.height;
-        const zoneWidth = zone.width / 100 * canvas.width;
-        const zoneHeight = zone.height / 100 * canvas.height;
-        const width = Math.min(zoneWidth * 3.1, zoneWidth * .62 * state.logoScale);
-        const height = Math.min(zoneHeight * 3.1, width * (logo.height / logo.width));
-        context.globalAlpha = .92;
-        const centerX = zoneX + state.logoPosition.x * zoneWidth;
-        const centerY = zoneY + state.logoPosition.y * zoneHeight;
-        context.save();
-        context.beginPath();
-        context.rect(zoneX, zoneY, zoneWidth, zoneHeight);
-        context.clip();
-        context.translate(centerX, centerY);
-        context.rotate(state.logoRotation * Math.PI / 180);
-        context.drawImage(logo, -width / 2, -height / 2, width, height);
-        context.restore();
+        const locations = state.markingLocation === "both" ? ["clip", "body"] as const : [state.markingLocation] as const;
+        for (const location of locations) {
+          const zone = printZones[state.penColor][state.activeView][location];
+          if (!zone.width || !zone.height) continue;
+          const transform = state.logoTransforms[location];
+          const zoneX = zone.x / 100 * canvas.width;
+          const zoneY = zone.y / 100 * canvas.height;
+          const zoneWidth = zone.width / 100 * canvas.width;
+          const zoneHeight = zone.height / 100 * canvas.height;
+          const width = Math.min(zoneWidth * 3.1, zoneWidth * .62 * transform.scale);
+          const height = Math.min(zoneHeight * 3.1, width * (logo.height / logo.width));
+          const centerX = zoneX + transform.position.x * zoneWidth;
+          const centerY = zoneY + transform.position.y * zoneHeight;
+          context.save();
+          context.globalAlpha = .92;
+          context.beginPath();
+          context.rect(zoneX, zoneY, zoneWidth, zoneHeight);
+          context.clip();
+          context.translate(centerX, centerY);
+          context.rotate((transform.rotation + (zone.rotate ?? 0)) * Math.PI / 180);
+          context.drawImage(logo, -width / 2, -height / 2, width, height);
+          context.restore();
+        }
       }
       return await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/png", .9));
     } catch {
@@ -105,14 +110,14 @@ export function PenConfigurator() {
     </div>
     <div className="container grid items-start gap-8 py-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(340px,.75fr)] lg:py-12">
       <div className="lg:sticky lg:top-28">
-        <PenPreview state={state} onPositionChange={logoPosition => patch({ logoPosition })} onViewChange={activeView => patch({ activeView })}/>
+        <PenPreview state={state} onPositionChange={(location, position) => patch({ logoTransforms: { ...state.logoTransforms, [location]: { ...state.logoTransforms[location], position } } })} onViewChange={activeView => patch({ activeView })}/>
         <PenViewSelector color={state.penColor} activeView={state.activeView} onChange={activeView => patch({ activeView })}/>
       </div>
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="grid gap-4">
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">01 — Modèle</p><h2 className="text-xl font-semibold">UN1QPEN</h2><p className="mt-2 text-sm leading-relaxed text-[#6e6e73]">Corps en matière issue de textile recyclé. Simulation de personnalisation 2D.</p></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">02 — Couleur</p><PenColorSelector value={state.penColor} onChange={selectColor}/></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">03 — Logo</p><LogoUploader logo={state.uploadedLogo} onChange={uploadedLogo => patch({ uploadedLogo })}/></section>
-        <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">04 — Marquage</p><div className="grid gap-6"><MarkingLocationSelector value={state.markingLocation} onChange={markingLocation => patch({ markingLocation })}/><LogoTransformControls scale={state.logoScale} rotation={state.logoRotation} preserveRatio={state.preserveRatio} markingColor={state.markingColor} onScaleChange={logoScale => patch({ logoScale })} onRotationChange={logoRotation => patch({ logoRotation })} onPositionChange={logoPosition => patch({ logoPosition })} onPreserveRatioChange={preserveRatio => patch({ preserveRatio })} onMarkingColorChange={markingColor => patch({ markingColor })}/></div></section>
+        <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">04 — Marquage</p><div className="grid gap-6"><MarkingLocationSelector value={state.markingLocation} onChange={markingLocation => patch({ markingLocation, editingLocation: markingLocation === "both" ? state.editingLocation : markingLocation })}/><LogoTransformControls scale={state.logoTransforms[state.editingLocation].scale} rotation={state.logoTransforms[state.editingLocation].rotation} editingLocation={state.editingLocation} showTargetSelector={state.markingLocation === "both"} preserveRatio={state.preserveRatio} markingColor={state.markingColor} onEditingLocationChange={editingLocation => patch({ editingLocation })} onScaleChange={scale => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], scale } } })} onRotationChange={rotation => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], rotation } } })} onPositionChange={position => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], position } } })} onPreserveRatioChange={preserveRatio => patch({ preserveRatio })} onMarkingColorChange={markingColor => patch({ markingColor })}/></div></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">05 — Quantité</p><QuantitySelector value={state.quantity} onChange={quantity => patch({ quantity })}/></section>
       </motion.div>
     </div>

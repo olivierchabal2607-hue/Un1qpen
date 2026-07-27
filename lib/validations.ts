@@ -20,9 +20,18 @@ export const quoteConfigurationSchema = z.object({
   markingColor: z.enum(["white", "warmGrey", "black"]),
   markingLocation: z.enum(["clip", "body", "both"]),
   activeView: z.enum(["view1", "view2", "view3", "view4", "view5", "view6"]),
-  logoScale: z.number().min(.45).max(5),
-  logoRotation: z.number().min(-180).max(180),
-  logoPosition: z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }),
+  logoTransforms: z.object({
+    clip: z.object({
+      scale: z.number().min(.45).max(5),
+      rotation: z.number().min(-180).max(180),
+      position: z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }),
+    }),
+    body: z.object({
+      scale: z.number().min(.45).max(5),
+      rotation: z.number().min(-180).max(180),
+      position: z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }),
+    }),
+  }),
   preserveRatio: z.boolean(),
   quantity: z.number().int().min(500, "La quantité minimale est de 500 pièces."),
   customerDetails: z.object({

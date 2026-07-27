@@ -31,9 +31,8 @@ export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: 
     ["Couleur du marquage", labels.markingColor[configuration.markingColor]],
     ["Emplacement", labels.markingLocation[configuration.markingLocation]],
     ["Quantité", configuration.quantity.toLocaleString("fr-FR")], ["Vue active", configuration.activeView],
-    ["Échelle du logo", String(configuration.logoScale)],
-    ["Rotation du logo", `${configuration.logoRotation}°`],
-    ["Position du logo", `x: ${configuration.logoPosition.x.toFixed(3)}, y: ${configuration.logoPosition.y.toFixed(3)}`],
+    ["Logo clip", `échelle ${configuration.logoTransforms.clip.scale}, rotation ${configuration.logoTransforms.clip.rotation}°, x ${configuration.logoTransforms.clip.position.x.toFixed(3)}, y ${configuration.logoTransforms.clip.position.y.toFixed(3)}`],
+    ["Logo corps", `échelle ${configuration.logoTransforms.body.scale}, rotation ${configuration.logoTransforms.body.rotation}°, x ${configuration.logoTransforms.body.position.x.toFixed(3)}, y ${configuration.logoTransforms.body.position.y.toFixed(3)}`],
   ];
   const attachments = [logo, ...(preview ? [preview] : [])];
   const { data, error } = await resend.emails.send({

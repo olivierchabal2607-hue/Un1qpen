@@ -17,7 +17,7 @@ import { getViewImage } from "@/lib/configurator";
 
 type Props = {
   state: ConfiguratorState;
-  onPositionChange: (position: LogoPosition) => void;
+  onPositionChange: (location: "clip" | "body", position: LogoPosition) => void;
   onViewChange?: (view: ConfiguratorState["activeView"]) => void;
 };
 
@@ -25,12 +25,14 @@ function LogoLayer({ state, zone, onPositionChange }: Props & { zone: PrintZone 
   const dragStart = useRef<{ pointerX: number; pointerY: number; position: LogoPosition } | null>(null);
   const logo = state.uploadedLogo;
   const printableLogo = logo?.previewUrl;
+  const location = zone === printZones[state.penColor][state.activeView].clip ? "clip" : "body";
+  const logoTransform = state.logoTransforms[location];
 
   function startDrag(event: PointerEvent<HTMLButtonElement>) {
     if (!logo) return;
     event.stopPropagation();
     event.currentTarget.setPointerCapture(event.pointerId);
-    dragStart.current = { pointerX: event.clientX, pointerY: event.clientY, position: state.logoPosition };
+    dragStart.current = { pointerX: event.clientX, pointerY: event.clientY, position: logoTransform.position };
   }
 
   function drag(event: PointerEvent<HTMLButtonElement>) {
@@ -39,7 +41,7 @@ function LogoLayer({ state, zone, onPositionChange }: Props & { zone: PrintZone 
     const bounds = event.currentTarget.getBoundingClientRect();
     const nextX = dragStart.current.position.x + (event.clientX - dragStart.current.pointerX) / bounds.width;
     const nextY = dragStart.current.position.y + (event.clientY - dragStart.current.pointerY) / bounds.height;
-    onPositionChange({ x: Math.min(1, Math.max(0, nextX)), y: Math.min(1, Math.max(0, nextY)) });
+    onPositionChange(location, { x: Math.min(1, Math.max(0, nextX)), y: Math.min(1, Math.max(0, nextY)) });
   }
 
   return <div
@@ -64,11 +66,11 @@ function LogoLayer({ state, zone, onPositionChange }: Props & { zone: PrintZone 
       {printableLogo ? <span
         className="absolute block"
         style={{
-          left: `${state.logoPosition.x * 100}%`,
-          top: `${state.logoPosition.y * 100}%`,
-          width: `${Math.min(310, 62 * state.logoScale)}%`,
-          height: `${Math.min(310, 62 * state.logoScale)}%`,
-          transform: `translate(-50%, -50%) rotate(${state.logoRotation}deg)`,
+          left: `${logoTransform.position.x * 100}%`,
+          top: `${logoTransform.position.y * 100}%`,
+          width: `${Math.min(310, 62 * logoTransform.scale)}%`,
+          height: `${Math.min(310, 62 * logoTransform.scale)}%`,
+          transform: `translate(-50%, -50%) rotate(${logoTransform.rotation}deg)`,
           backgroundColor: markingColorOptions[state.markingColor].value,
           WebkitMaskImage: `url("${printableLogo}")`,
           maskImage: `url("${printableLogo}")`,

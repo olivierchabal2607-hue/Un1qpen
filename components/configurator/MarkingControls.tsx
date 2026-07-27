@@ -17,13 +17,20 @@ export function MarkingLocationSelector({ value, onChange }: { value: MarkingLoc
 }
 
 export function LogoTransformControls({
-  scale, rotation, preserveRatio, markingColor, onScaleChange, onRotationChange, onPositionChange, onPreserveRatioChange, onMarkingColorChange,
+  scale, rotation, editingLocation, showTargetSelector, preserveRatio, markingColor, onEditingLocationChange, onScaleChange, onRotationChange, onPositionChange, onPreserveRatioChange, onMarkingColorChange,
 }: {
-  scale: number; rotation: number; preserveRatio: boolean; markingColor: MarkingColor;
+  scale: number; rotation: number; editingLocation: "clip" | "body"; showTargetSelector: boolean; preserveRatio: boolean; markingColor: MarkingColor;
+  onEditingLocationChange: (value: "clip" | "body") => void;
   onScaleChange: (value: number) => void; onRotationChange: (value: number) => void; onPositionChange: (value: LogoPosition) => void;
   onPreserveRatioChange: (value: boolean) => void; onMarkingColorChange: (value: MarkingColor) => void;
 }) {
   return <div className="grid gap-5">
+    {showTargetSelector && <fieldset>
+      <legend className="text-sm font-semibold">Élément à régler</legend>
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        {(["clip", "body"] as const).map(location => <button key={location} type="button" aria-pressed={editingLocation === location} onClick={() => onEditingLocationChange(location)} className={`min-h-11 rounded-xl border px-3 text-xs font-semibold ${editingLocation === location ? "border-[#17486a] bg-[#eef4f7]" : "border-[#dedbd4] bg-white"}`}>{location === "clip" ? "Régler le clip" : "Régler le corps"}</button>)}
+      </div>
+    </fieldset>}
     <label className="text-sm font-semibold">Taille du logo
       <input className="mt-3 w-full accent-[#17486a]" type="range" min=".45" max="5" step=".05" value={scale} onChange={event => onScaleChange(Number(event.target.value))}/>
     </label>

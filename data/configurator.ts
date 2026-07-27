@@ -8,6 +8,7 @@ export type MarkingColor = (typeof markingColors)[number];
 export type MarkingLocation = (typeof markingLocations)[number];
 export type PenView = (typeof penViews)[number];
 export type LogoPosition = { x: number; y: number };
+export type LogoTransform = { scale: number; rotation: number; position: LogoPosition };
 export type PrintZone = { x: number; y: number; width: number; height: number; rotate?: number };
 
 export type CustomerDetails = {
@@ -34,9 +35,8 @@ export type ConfiguratorState = {
   markingLocation: MarkingLocation;
   activeView: PenView;
   uploadedLogo: UploadedLogo | null;
-  logoScale: number;
-  logoRotation: number;
-  logoPosition: LogoPosition;
+  logoTransforms: Record<"clip" | "body", LogoTransform>;
+  editingLocation: "clip" | "body";
   preserveRatio: boolean;
   quantity: number;
   customerDetails: CustomerDetails;
@@ -109,11 +109,11 @@ export const viewAspectRatios: Record<PenColor, Record<PenView, number>> = {
 };
 
 const zones = {
-  view1: { clip: { x: 35, y: 11, width: 12, height: 28 }, body: { x: 47, y: 24, width: 11, height: 34 } },
-  view2: { clip: { x: 35, y: 10, width: 15, height: 29 }, body: { x: 49, y: 24, width: 10, height: 34 } },
-  view3: { clip: { x: 40, y: 10, width: 20, height: 30 }, body: { x: 47, y: 25, width: 11, height: 34 } },
-  view4: { clip: { x: 46, y: 10, width: 17, height: 29 }, body: { x: 42, y: 24, width: 10, height: 34 } },
-  view5: { clip: { x: 52, y: 11, width: 12, height: 28 }, body: { x: 42, y: 24, width: 11, height: 34 } },
+  view1: { clip: { x: 39, y: 9, width: 9, height: 40, rotate: -1 }, body: { x: 47, y: 24, width: 11, height: 34 } },
+  view2: { clip: { x: 39.5, y: 8.5, width: 12, height: 41, rotate: -.5 }, body: { x: 49, y: 24, width: 10, height: 34 } },
+  view3: { clip: { x: 43.5, y: 9, width: 13, height: 41 }, body: { x: 47, y: 25, width: 11, height: 34 } },
+  view4: { clip: { x: 48.5, y: 8.5, width: 12, height: 41, rotate: .5 }, body: { x: 42, y: 24, width: 10, height: 34 } },
+  view5: { clip: { x: 52, y: 9, width: 9, height: 40, rotate: 1 }, body: { x: 42, y: 24, width: 11, height: 34 } },
   view6: { clip: { x: 50, y: 10, width: 0, height: 0 }, body: { x: 45, y: 24, width: 10, height: 34 } },
 } satisfies Record<PenView, { clip: PrintZone; body: PrintZone }>;
 
@@ -142,9 +142,11 @@ export const initialConfiguratorState: ConfiguratorState = {
   markingLocation: "clip",
   activeView: "view2",
   uploadedLogo: null,
-  logoScale: 1,
-  logoRotation: 0,
-  logoPosition: { x: 0.5, y: 0.5 },
+  logoTransforms: {
+    clip: { scale: 1, rotation: 0, position: { x: 0.5, y: 0.5 } },
+    body: { scale: 1, rotation: 0, position: { x: 0.5, y: 0.5 } },
+  },
+  editingLocation: "clip",
   preserveRatio: true,
   quantity: 500,
   customerDetails: initialCustomerDetails,

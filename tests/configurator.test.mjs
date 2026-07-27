@@ -11,7 +11,12 @@ import {
 
 const initial = {
   penColor: "warmGrey", markingColor: "black", markingLocation: "clip", activeView: "view1",
-  uploadedLogo: null, logoScale: 1, logoRotation: 0, logoPosition: { x: .5, y: .5 }, preserveRatio: true, quantity: 500,
+  uploadedLogo: null,
+  logoTransforms: {
+    clip: { scale: 1, rotation: 0, position: { x: .5, y: .5 } },
+    body: { scale: 1, rotation: 0, position: { x: .5, y: .5 } },
+  },
+  editingLocation: "clip", preserveRatio: true, quantity: 500,
   customerDetails: { company: "", firstName: "", lastName: "", email: "", phone: "", deliveryDate: "", comment: "", consent: false },
 };
 
