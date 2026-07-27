@@ -7,8 +7,22 @@ export const productFeatures = [
   "Marquage selon les possibilités techniques",
 ];
 export const colors = [
-  { name: "Bleu nuit", hex: "#101114" },
-  { name: "Terre textile", hex: "#47738F" },
-  { name: "Gris fibre", hex: "#AAA8A1" },
-  { name: "Ivoire", hex: "#E8E4D9" },
-];
+  {
+    name: "Warm Grey",
+    marking: "Marquage blanc",
+    image: "/images/un1qpen-color-warm-grey.png",
+    alt: "Stylo UN1QPEN Warm Grey avec marquage blanc",
+  },
+  {
+    name: "Blanc",
+    marking: "Marquage noir",
+    image: "/images/un1qpen-color-white.png",
+    alt: "Stylo UN1QPEN blanc avec marquage noir",
+  },
+  {
+    name: "Noir",
+    marking: "Marquage blanc",
+    image: "/images/un1qpen-color-black.png",
+    alt: "Stylo UN1QPEN noir avec marquage blanc",
+  },
+] as const;

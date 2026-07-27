@@ -12,5 +12,8 @@ export async function POST(request: Request) {
     }
     await sendContactRequest(parsed.data);
     return NextResponse.json({ ok: true });
-  } catch { return NextResponse.json({ error: "Requête invalide." }, { status: 400 }); }
+  } catch (error) {
+    console.error("Contact request failed", error);
+    return NextResponse.json({ error: "L’envoi a échoué. Vous pouvez nous écrire à contact@un1qpen.fr." }, { status: 500 });
+  }
 }
