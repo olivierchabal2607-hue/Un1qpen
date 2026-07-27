@@ -14,3 +14,26 @@ export const contactSchema = z.object({
   website: z.string().max(0).optional(),
 });
 export type ContactInput = z.infer<typeof contactSchema>;
+
+export const quoteConfigurationSchema = z.object({
+  penColor: z.enum(["white", "warmGrey", "black"]),
+  markingColor: z.enum(["white", "warmGrey", "black"]),
+  markingLocation: z.enum(["clip", "body", "both"]),
+  activeView: z.enum(["view1", "view2", "view3", "view4", "view5", "view6"]),
+  logoScale: z.number().min(.45).max(1.5),
+  logoPosition: z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }),
+  preserveRatio: z.boolean(),
+  quantity: z.number().int().min(500, "La quantité minimale est de 500 pièces."),
+  customerDetails: z.object({
+    company: z.string().min(2, "Indiquez votre société."),
+    firstName: z.string().min(2, "Indiquez votre prénom."),
+    lastName: z.string().min(2, "Indiquez votre nom."),
+    email: z.string().email("Adresse e-mail invalide."),
+    phone: z.string().min(6, "Indiquez votre téléphone."),
+    deliveryDate: z.string().optional(),
+    comment: z.string().optional(),
+    consent: z.literal(true, { errorMap: () => ({ message: "Votre consentement est nécessaire." }) }),
+  }),
+});
+
+export type QuoteConfiguration = z.infer<typeof quoteConfigurationSchema>;

@@ -1,5 +1,56 @@
 # UN1QPEN
 
+## Configurateur de personnalisation
+
+Le configurateur est accessible à l’adresse `/configurateur`.
+
+### Images produit
+
+Les six vues blanches nettoyées sont intégrées dans
+`public/images/configurator/` sous les noms `white-view1.png` à
+`white-view6.png`. Les douze images définitives encore attendues sont :
+
+- `warm-grey-view1.webp` à `warm-grey-view6.webp`
+- `black-view1.webp` à `black-view6.webp`
+
+Les fichiers doivent partager exactement la même toile et conserver les
+proportions du stylo. Après leur ajout, adapter `getViewImage()` dans
+`lib/configurator.ts`. Le détail des vues est documenté dans
+`public/images/configurator/README.md`.
+
+### Zones de marquage
+
+Toutes les coordonnées en pourcentage sont centralisées dans
+`data/configurator.ts`, objet `printZones`. Chaque couleur et chacune des six
+vues expose une zone `clip` et une zone `body`.
+
+### Demandes de devis
+
+La route `app/api/quote/route.ts` valide le formulaire et transmet la
+configuration, le logo original et, lorsque le navigateur peut la produire,
+une image PNG d’aperçu. L’envoi utilise `lib/quote-mail.ts`.
+
+Variables nécessaires en production :
+
+```env
+EMAIL_PROVIDER=resend
+RESEND_API_KEY=re_xxxxxxxxx
+EMAIL_FROM=UN1QPEN <site@un1qpen.com>
+CONTACT_EMAIL=contact@un1qpen.fr
+NEXT_PUBLIC_SITE_URL=https://un1qpen.com
+```
+
+Le domaine `un1qpen.com` doit être vérifié dans Resend. Si Resend n’est pas
+configuré, les demandes sont journalisées uniquement en développement ; la
+production affiche explicitement une erreur.
+
+### Persistance
+
+Les choix du configurateur et les coordonnées saisies sont conservés dans
+`localStorage`. Le fichier logo et le consentement ne sont volontairement pas
+persistés afin d’éviter de stocker un fichier volumineux ou un consentement
+obsolète dans le navigateur.
+
 Site vitrine B2B premium pour présenter l’innovation matière UN1QPEN.
 
 ## Lancer le projet

@@ -1,0 +1,122 @@
+export const penColors = ["white", "warmGrey", "black"] as const;
+export const markingColors = ["white", "warmGrey", "black"] as const;
+export const markingLocations = ["clip", "body", "both"] as const;
+export const penViews = ["view1", "view2", "view3", "view4", "view5", "view6"] as const;
+
+export type PenColor = (typeof penColors)[number];
+export type MarkingColor = (typeof markingColors)[number];
+export type MarkingLocation = (typeof markingLocations)[number];
+export type PenView = (typeof penViews)[number];
+export type LogoPosition = { x: number; y: number };
+export type PrintZone = { x: number; y: number; width: number; height: number; rotate?: number };
+
+export type CustomerDetails = {
+  company: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  deliveryDate: string;
+  comment: string;
+  consent: boolean;
+};
+
+export type UploadedLogo = {
+  file: File;
+  name: string;
+  type: string;
+  previewUrl: string | null;
+};
+
+export type ConfiguratorState = {
+  penColor: PenColor;
+  markingColor: MarkingColor;
+  markingLocation: MarkingLocation;
+  activeView: PenView;
+  uploadedLogo: UploadedLogo | null;
+  logoScale: number;
+  logoPosition: LogoPosition;
+  preserveRatio: boolean;
+  quantity: number;
+  customerDetails: CustomerDetails;
+};
+
+export const colorOptions: Record<PenColor, { label: string; swatch: string; image: string; defaultMarking: MarkingColor }> = {
+  white: {
+    label: "Blanc",
+    swatch: "#f5f4f0",
+    image: "/images/un1qpen-color-white.png",
+    defaultMarking: "warmGrey",
+  },
+  warmGrey: {
+    label: "Warm Grey",
+    swatch: "#9b918a",
+    image: "/images/un1qpen-color-warm-grey.png",
+    defaultMarking: "black",
+  },
+  black: {
+    label: "Noir",
+    swatch: "#1d1d1f",
+    image: "/images/un1qpen-color-black.png",
+    defaultMarking: "white",
+  },
+};
+
+export const markingColorOptions: Record<MarkingColor, { label: string; value: string }> = {
+  white: { label: "Blanc", value: "#ffffff" },
+  warmGrey: { label: "Warm Grey", value: "#8f847d" },
+  black: { label: "Noir", value: "#111214" },
+};
+
+export const viewOptions: Array<{ id: PenView; label: string; transform: string }> = [
+  { id: "view1", label: "Clip à gauche", transform: "none" },
+  { id: "view2", label: "Trois-quarts gauche", transform: "none" },
+  { id: "view3", label: "Face du clip", transform: "none" },
+  { id: "view4", label: "Trois-quarts droit", transform: "none" },
+  { id: "view5", label: "Clip à droite", transform: "none" },
+  { id: "view6", label: "Vue arrière", transform: "none" },
+];
+
+const zones = {
+  view1: { clip: { x: 35, y: 11, width: 12, height: 28 }, body: { x: 47, y: 24, width: 11, height: 34 } },
+  view2: { clip: { x: 35, y: 10, width: 15, height: 29 }, body: { x: 49, y: 24, width: 10, height: 34 } },
+  view3: { clip: { x: 40, y: 10, width: 20, height: 30 }, body: { x: 47, y: 25, width: 11, height: 34 } },
+  view4: { clip: { x: 46, y: 10, width: 17, height: 29 }, body: { x: 42, y: 24, width: 10, height: 34 } },
+  view5: { clip: { x: 52, y: 11, width: 12, height: 28 }, body: { x: 42, y: 24, width: 11, height: 34 } },
+  view6: { clip: { x: 50, y: 10, width: 0, height: 0 }, body: { x: 45, y: 24, width: 10, height: 34 } },
+} satisfies Record<PenView, { clip: PrintZone; body: PrintZone }>;
+
+// Centralized by color so production-specific adjustments can be made without
+// touching preview components. Current geometry is shared by the three colors.
+export const printZones: Record<PenColor, Record<PenView, { clip: PrintZone; body: PrintZone }>> = {
+  white: zones,
+  warmGrey: zones,
+  black: zones,
+};
+
+export const initialCustomerDetails: CustomerDetails = {
+  company: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  deliveryDate: "",
+  comment: "",
+  consent: false,
+};
+
+export const initialConfiguratorState: ConfiguratorState = {
+  penColor: "white",
+  markingColor: "warmGrey",
+  markingLocation: "clip",
+  activeView: "view2",
+  uploadedLogo: null,
+  logoScale: 1,
+  logoPosition: { x: 0.5, y: 0.5 },
+  preserveRatio: true,
+  quantity: 500,
+  customerDetails: initialCustomerDetails,
+};
+
+export const quickQuantities = [500, 1000, 2500, 5000, 10000];
+export const CONFIGURATOR_STORAGE_KEY = "un1qpen-configurator-v1";
