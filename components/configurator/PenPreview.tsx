@@ -67,7 +67,7 @@ function LogoLayer({ state, zone, onPositionChange }: Props & { zone: PrintZone 
           top: `${state.logoPosition.y * 100}%`,
           width: `${Math.min(95, 62 * state.logoScale)}%`,
           height: `${Math.min(95, 62 * state.logoScale)}%`,
-          transform: "translate(-50%, -50%)",
+          transform: `translate(-50%, -50%) rotate(${state.logoRotation}deg)`,
           backgroundColor: markingColorOptions[state.markingColor].value,
           WebkitMaskImage: `url("${printableLogo}")`,
           maskImage: `url("${printableLogo}")`,

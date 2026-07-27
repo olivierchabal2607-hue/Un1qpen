@@ -46,6 +46,7 @@ export function QuoteRequestForm({ state, onCustomerChange, createPreview }: Pro
         markingLocation: state.markingLocation,
         activeView: state.activeView,
         logoScale: state.logoScale,
+        logoRotation: state.logoRotation,
         logoPosition: state.logoPosition,
         preserveRatio: state.preserveRatio,
         quantity: state.quantity,

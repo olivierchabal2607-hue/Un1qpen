@@ -17,19 +17,22 @@ export function MarkingLocationSelector({ value, onChange }: { value: MarkingLoc
 }
 
 export function LogoTransformControls({
-  scale, preserveRatio, markingColor, onScaleChange, onPositionChange, onPreserveRatioChange, onMarkingColorChange,
+  scale, rotation, preserveRatio, markingColor, onScaleChange, onRotationChange, onPositionChange, onPreserveRatioChange, onMarkingColorChange,
 }: {
-  scale: number; preserveRatio: boolean; markingColor: MarkingColor;
-  onScaleChange: (value: number) => void; onPositionChange: (value: LogoPosition) => void;
+  scale: number; rotation: number; preserveRatio: boolean; markingColor: MarkingColor;
+  onScaleChange: (value: number) => void; onRotationChange: (value: number) => void; onPositionChange: (value: LogoPosition) => void;
   onPreserveRatioChange: (value: boolean) => void; onMarkingColorChange: (value: MarkingColor) => void;
 }) {
   return <div className="grid gap-5">
     <label className="text-sm font-semibold">Taille du logo
       <input className="mt-3 w-full accent-[#17486a]" type="range" min=".45" max="1.5" step=".05" value={scale} onChange={event => onScaleChange(Number(event.target.value))}/>
     </label>
+    <label className="text-sm font-semibold">Rotation du logo <span className="font-normal text-[#6e6e73]">({rotation}°)</span>
+      <input aria-label="Rotation du logo" className="mt-3 w-full accent-[#17486a]" type="range" min="-180" max="180" step="1" value={rotation} onChange={event => onRotationChange(Number(event.target.value))}/>
+    </label>
     <label className="flex items-center gap-3 text-sm"><input type="checkbox" checked={preserveRatio} onChange={event => onPreserveRatioChange(event.target.checked)} className="size-4 accent-[#17486a]"/>Conserver les proportions du logo</label>
     <fieldset><legend className="text-sm font-semibold">Couleur du marquage</legend><div className="mt-3 flex flex-wrap gap-2">{markingColors.map(color => <button type="button" key={color} aria-pressed={markingColor === color} onClick={() => onMarkingColorChange(color)} className={`flex min-h-11 items-center gap-2 rounded-full border px-4 text-xs font-semibold ${markingColor === color ? "border-[#17486a] bg-[#eef4f7]" : "border-[#dedbd4] bg-white"}`}><span className="size-5 rounded-full border border-black/15" style={{ background: markingColorOptions[color].value }}/>{markingColorOptions[color].label}</button>)}</div></fieldset>
-    <button type="button" onClick={() => onPositionChange({ x: .5, y: .5 })} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#17486a] px-5 text-sm font-semibold text-[#17486a]"><RotateCcw size={16}/>Réinitialiser le positionnement</button>
+    <button type="button" onClick={() => { onPositionChange({ x: .5, y: .5 }); onRotationChange(0); }} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#17486a] px-5 text-sm font-semibold text-[#17486a]"><RotateCcw size={16}/>Réinitialiser le positionnement</button>
     <p className="text-xs leading-relaxed text-[#6e6e73]">Déplacez directement le logo sur le stylo avec la souris ou le doigt. Il reste automatiquement contenu dans la zone imprimable.</p>
   </div>;
 }

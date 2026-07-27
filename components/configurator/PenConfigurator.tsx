@@ -80,7 +80,13 @@ export function PenConfigurator() {
         const width = Math.min(zoneWidth * .95, zoneWidth * .62 * state.logoScale);
         const height = Math.min(zoneHeight * .95, width * (logo.height / logo.width));
         context.globalAlpha = .92;
-        context.drawImage(logo, zoneX + state.logoPosition.x * zoneWidth - width / 2, zoneY + state.logoPosition.y * zoneHeight - height / 2, width, height);
+        const centerX = zoneX + state.logoPosition.x * zoneWidth;
+        const centerY = zoneY + state.logoPosition.y * zoneHeight;
+        context.save();
+        context.translate(centerX, centerY);
+        context.rotate(state.logoRotation * Math.PI / 180);
+        context.drawImage(logo, -width / 2, -height / 2, width, height);
+        context.restore();
       }
       return await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/png", .9));
     } catch {
@@ -103,7 +109,7 @@ export function PenConfigurator() {
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">01 — Modèle</p><h2 className="text-xl font-semibold">UN1QPEN</h2><p className="mt-2 text-sm leading-relaxed text-[#6e6e73]">Corps en matière issue de textile recyclé. Simulation de personnalisation 2D.</p></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">02 — Couleur</p><PenColorSelector value={state.penColor} onChange={selectColor}/></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">03 — Logo</p><LogoUploader logo={state.uploadedLogo} onChange={uploadedLogo => patch({ uploadedLogo })}/></section>
-        <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">04 — Marquage</p><div className="grid gap-6"><MarkingLocationSelector value={state.markingLocation} onChange={markingLocation => patch({ markingLocation })}/><LogoTransformControls scale={state.logoScale} preserveRatio={state.preserveRatio} markingColor={state.markingColor} onScaleChange={logoScale => patch({ logoScale })} onPositionChange={logoPosition => patch({ logoPosition })} onPreserveRatioChange={preserveRatio => patch({ preserveRatio })} onMarkingColorChange={markingColor => patch({ markingColor })}/></div></section>
+        <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">04 — Marquage</p><div className="grid gap-6"><MarkingLocationSelector value={state.markingLocation} onChange={markingLocation => patch({ markingLocation })}/><LogoTransformControls scale={state.logoScale} rotation={state.logoRotation} preserveRatio={state.preserveRatio} markingColor={state.markingColor} onScaleChange={logoScale => patch({ logoScale })} onRotationChange={logoRotation => patch({ logoRotation })} onPositionChange={logoPosition => patch({ logoPosition })} onPreserveRatioChange={preserveRatio => patch({ preserveRatio })} onMarkingColorChange={markingColor => patch({ markingColor })}/></div></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">05 — Quantité</p><QuantitySelector value={state.quantity} onChange={quantity => patch({ quantity })}/></section>
       </motion.div>
     </div>

@@ -11,7 +11,7 @@ import {
 
 const initial = {
   penColor: "warmGrey", markingColor: "black", markingLocation: "clip", activeView: "view1",
-  uploadedLogo: null, logoScale: 1, logoPosition: { x: .5, y: .5 }, preserveRatio: true, quantity: 500,
+  uploadedLogo: null, logoScale: 1, logoRotation: 0, logoPosition: { x: .5, y: .5 }, preserveRatio: true, quantity: 500,
   customerDetails: { company: "", firstName: "", lastName: "", email: "", phone: "", deliveryDate: "", comment: "", consent: false },
 };
 
@@ -58,4 +58,3 @@ test("persiste la configuration sans le fichier et restaure les paramètres", ()
   assert.equal(restored.activeView, "view5");
   assert.equal(restored.uploadedLogo, null);
 });
-

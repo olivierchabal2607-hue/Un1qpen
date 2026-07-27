@@ -35,6 +35,7 @@ export type ConfiguratorState = {
   activeView: PenView;
   uploadedLogo: UploadedLogo | null;
   logoScale: number;
+  logoRotation: number;
   logoPosition: LogoPosition;
   preserveRatio: boolean;
   quantity: number;
@@ -112,6 +113,7 @@ export const initialConfiguratorState: ConfiguratorState = {
   activeView: "view2",
   uploadedLogo: null,
   logoScale: 1,
+  logoRotation: 0,
   logoPosition: { x: 0.5, y: 0.5 },
   preserveRatio: true,
   quantity: 500,

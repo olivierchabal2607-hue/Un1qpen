@@ -32,6 +32,7 @@ export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: 
     ["Emplacement", labels.markingLocation[configuration.markingLocation]],
     ["Quantité", configuration.quantity.toLocaleString("fr-FR")], ["Vue active", configuration.activeView],
     ["Échelle du logo", String(configuration.logoScale)],
+    ["Rotation du logo", `${configuration.logoRotation}°`],
     ["Position du logo", `x: ${configuration.logoPosition.x.toFixed(3)}, y: ${configuration.logoPosition.y.toFixed(3)}`],
   ];
   const attachments = [logo, ...(preview ? [preview] : [])];
@@ -45,4 +46,3 @@ export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: 
   if (error) throw new Error(`Resend delivery failed: ${error.message}`);
   return { accepted: true, id: data?.id };
 }
-
