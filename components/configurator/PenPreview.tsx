@@ -7,6 +7,7 @@ import {
   markingColorOptions,
   printZones,
   penViews,
+  viewAspectRatios,
   viewOptions,
   type ConfiguratorState,
   type LogoPosition,
@@ -119,7 +120,10 @@ export function PenPreview({ state, onPositionChange, onViewChange }: Props) {
     onPointerUp={() => { spinStart.current = null; }}
     onPointerCancel={() => { spinStart.current = null; }}
   >
-    <div className="absolute inset-y-4 left-1/2 aspect-[2/3] -translate-x-1/2 overflow-hidden">
+    <div
+      className="absolute inset-y-4 left-1/2 -translate-x-1/2 overflow-hidden"
+      style={{ aspectRatio: viewAspectRatios[state.penColor][state.activeView] }}
+    >
       <Image
         src={getViewImage(state.penColor, state.activeView)}
         alt={`UN1QPEN ${view.label}, coloris ${state.penColor}`}

@@ -78,6 +78,36 @@ export const viewOptions: Array<{ id: PenView; label: string; transform: string 
   { id: "view6", label: "Vue arrière", transform: "none" },
 ];
 
+// The white source renders have different native canvases. Keeping their real
+// aspect ratio makes print-zone coordinates follow the pen instead of the
+// surrounding whitespace when the user changes view.
+export const viewAspectRatios: Record<PenColor, Record<PenView, number>> = {
+  white: {
+    view1: 726 / 2167,
+    view2: 724 / 2172,
+    view3: 728 / 2161,
+    view4: 742 / 2120,
+    view5: 897 / 1753,
+    view6: 732 / 2149,
+  },
+  warmGrey: {
+    view1: 721 / 2180,
+    view2: 2 / 3,
+    view3: 2 / 3,
+    view4: 2 / 3,
+    view5: 2 / 3,
+    view6: 2 / 3,
+  },
+  black: {
+    view1: 2 / 3,
+    view2: 2 / 3,
+    view3: 2 / 3,
+    view4: 2 / 3,
+    view5: 1023 / 1537,
+    view6: 2 / 3,
+  },
+};
+
 const zones = {
   view1: { clip: { x: 35, y: 11, width: 12, height: 28 }, body: { x: 47, y: 24, width: 11, height: 34 } },
   view2: { clip: { x: 35, y: 10, width: 15, height: 29 }, body: { x: 49, y: 24, width: 10, height: 34 } },
