@@ -7,8 +7,8 @@ export const productFeatures = [
   "Marquage selon les possibilités techniques",
 ];
 export const colors = [
-  { name: "Bleu nuit", hex: "#182B3A" },
-  { name: "Terre textile", hex: "#A46F52" },
+  { name: "Bleu nuit", hex: "#101114" },
+  { name: "Terre textile", hex: "#47738F" },
   { name: "Gris fibre", hex: "#AAA8A1" },
   { name: "Ivoire", hex: "#E8E4D9" },
 ];
