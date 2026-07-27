@@ -1,6 +1,6 @@
 export const site = {
   name: "UN1QPEN",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://un1qpen.fr",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://un1qpen.com",
   email: "contact@un1qpen.fr",
   linkedin: "https://www.linkedin.com/company/un1qpen",
   tagline: "Plus de solutions, moins de pollution.",

@@ -35,7 +35,7 @@ export async function sendContactRequest(data: ContactInput) {
 
   const resend = new Resend(apiKey);
   const recipient = process.env.CONTACT_EMAIL || "contact@un1qpen.fr";
-  const from = process.env.EMAIL_FROM || "UN1QPEN <contact@un1qpen.fr>";
+  const from = process.env.EMAIL_FROM || "UN1QPEN <site@un1qpen.com>";
   const requestType = requestLabels[data.requestType] || data.requestType;
   const fullName = `${data.firstName} ${data.lastName}`;
   const rows = [
