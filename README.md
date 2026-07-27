@@ -6,17 +6,17 @@ Le configurateur est accessible à l’adresse `/configurateur`.
 
 ### Images produit
 
-Les six vues blanches nettoyées sont intégrées dans
-`public/images/configurator/` sous les noms `white-view1.png` à
-`white-view6.png`. Les douze images définitives encore attendues sont :
+Les dix-huit vues nettoyées sont intégrées dans
+`public/images/configurator/` :
 
-- `warm-grey-view1.webp` à `warm-grey-view6.webp`
-- `black-view1.webp` à `black-view6.webp`
+- `white-view1.png` à `white-view6.png`
+- `warm-grey-view1.png` à `warm-grey-view6.png`
+- `black-view1.png` à `black-view6.png`
 
-Les fichiers doivent partager exactement la même toile et conserver les
-proportions du stylo. Après leur ajout, adapter `getViewImage()` dans
-`lib/configurator.ts`. Le détail des vues est documenté dans
-`public/images/configurator/README.md`.
+Les fichiers partagent la même toile et conservent les proportions du stylo.
+La correspondance entre couleur, angle et fichier est centralisée dans
+`getViewImage()` dans `lib/configurator.ts`. Le détail des vues est documenté
+dans `public/images/configurator/README.md`.
 
 ### Zones de marquage
 

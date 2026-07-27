@@ -21,10 +21,8 @@ export function isValidLogo(file: Pick<File, "size" | "type">) {
 }
 
 export function getViewImage(color: PenColor, view: PenView) {
-  if (color === "white") return `/images/configurator/white-${view}.png`;
-  // Temporary fallback for Warm Grey and black until their twelve 360° frames
-  // are supplied. The six final white views are already integrated.
-  return `/images/un1qpen-color-${color === "warmGrey" ? "warm-grey" : color}.png`;
+  const assetColor = color === "warmGrey" ? "warm-grey" : color;
+  return `/images/configurator/${assetColor}-${view}.png`;
 }
 
 export function serializeConfiguration(state: ConfiguratorState) {
