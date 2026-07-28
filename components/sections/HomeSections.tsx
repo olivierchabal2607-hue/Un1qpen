@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, MapPin, PenLine, Recycle, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb, MapPin, PenLine, Recycle, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/animations/AnimatedReveal";
 import { Button, Card, Container, SectionHeading } from "@/components/ui";
@@ -10,8 +10,20 @@ import { ProductVisual } from "@/components/animations/ProductVisual";
 import { HeroColorVisual } from "@/components/animations/HeroColorVisual";
 import { workshopPhotos, workshopVideos } from "@/data/workshop";
 
+function RtexIcon({ size = 23 }: { size?: number; strokeWidth?: number }) {
+  return <Image src="/images/rtex-icon.png" alt="" width={size} height={size} className="object-contain"/>;
+}
+
 export function HeroSection() {
-  const points = [[Recycle,"Matière issue de textile recyclé"],[Sparkles,"Sans nouveau pétrole pour le corps"],[MapPin,"Conçu en Europe"],[PenLine,"Personnalisable pour vos idées"]] as const;
+  const points = [
+    [RtexIcon, "RTEX", "Textile recyclé en France", null],
+    [Recycle, "Matière issue du recyclage", "À 95 %", null],
+    [Sparkles, "Sans nouveau pétrole", "Pour le corps du stylo", null],
+    [MapPin, "Circuit ultra-court", "100 % made in Europe", null],
+    [PenLine, "Vos idées", "Personnalisables à l’infini", null],
+    [Globe2, "Impact environnemental minimal", "Bilan carbone ultra-faible", null],
+    [Lightbulb, "L’objet média", "Qui répond à toutes vos attentes RSE !", null],
+  ] as const;
   return <section className="hero-home relative flex min-h-[100svh] items-center overflow-hidden bg-[#f7f6f3] pb-7 pt-24 text-[#1d1d1f]">
     <div className="hero-visual absolute inset-y-[5%] right-0 w-[92%] bg-[#f7f6f3]">
       <HeroColorVisual/>
@@ -24,8 +36,8 @@ export function HeroSection() {
         <p className="hero-intro mt-5 max-w-xl text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-[#40464b]">Un textile industriel destiné à être éliminé devient le corps d’un stylo conçu pour communiquer autrement.</p>
       </AnimatedReveal>
       <AnimatedReveal delay={.14} className="hero-details mt-6 max-w-[700px]">
-        <div className="grid grid-cols-2 gap-4 border-y border-black/10 py-4 sm:grid-cols-4">
-          {points.map(([Icon,label])=><div key={label}><Icon size={24} strokeWidth={1.4}/><p className="mt-3 max-w-[130px] text-[11px] font-semibold uppercase leading-relaxed tracking-wide">{label}</p></div>)}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-5 border-y border-black/10 py-4 sm:grid-cols-3">
+          {points.map(([Icon,title,detail,note])=><div key={title}><Icon size={23} strokeWidth={1.4}/><p className="mt-2 max-w-[180px] text-[10px] font-semibold uppercase leading-relaxed tracking-wide">{title}<span className="block text-[#555b60]">{detail}</span>{note && <span className="block font-medium normal-case text-[#6e6e73]">{note}</span>}</p></div>)}
         </div>
         <div className="mt-5 flex flex-wrap gap-3">
           <Button href="#decouvrir">Découvrir UN1QPEN</Button>
