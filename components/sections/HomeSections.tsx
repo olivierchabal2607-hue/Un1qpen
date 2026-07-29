@@ -11,7 +11,7 @@ import { HeroColorVisual } from "@/components/animations/HeroColorVisual";
 import { workshopPhotos, workshopVideos } from "@/data/workshop";
 
 function RtexIcon({ size = 23 }: { size?: number; strokeWidth?: number }) {
-  return <Image src="/images/rtex-icon.png" alt="" width={size} height={size} className="object-contain"/>;
+  return <Image src="/images/rtex-icon.png" alt="" width={172} height={211} style={{ height: size + 4, width: "auto" }} className="object-contain"/>;
 }
 
 export function HeroSection() {
