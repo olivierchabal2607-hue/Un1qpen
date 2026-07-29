@@ -19,6 +19,7 @@ function RtexIcon({ size = 23 }: { size?: number; strokeWidth?: number }) {
       height: size + 4,
       WebkitMask: "url('/images/rtex-icon.png') center / contain no-repeat",
       mask: "url('/images/rtex-icon.png') center / contain no-repeat",
+      filter: "drop-shadow(.55px 0 currentColor) drop-shadow(-.55px 0 currentColor) drop-shadow(0 .55px currentColor) drop-shadow(0 -.55px currentColor)",
     }}
   />;
 }
