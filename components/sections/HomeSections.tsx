@@ -11,7 +11,16 @@ import { HeroColorVisual } from "@/components/animations/HeroColorVisual";
 import { workshopPhotos, workshopVideos } from "@/data/workshop";
 
 function RtexIcon({ size = 23 }: { size?: number; strokeWidth?: number }) {
-  return <Image src="/images/rtex-icon.png" alt="" width={172} height={211} style={{ height: size + 4, width: "auto" }} className="object-contain"/>;
+  return <span
+    aria-hidden="true"
+    className="inline-block bg-current"
+    style={{
+      width: size * (172 / 211),
+      height: size + 4,
+      WebkitMask: "url('/images/rtex-icon.png') center / contain no-repeat",
+      mask: "url('/images/rtex-icon.png') center / contain no-repeat",
+    }}
+  />;
 }
 
 export function HeroSection() {
@@ -107,7 +116,7 @@ export function WorkshopSection() {
 
 export function EuropeOriginSection() { return <section className="section overflow-hidden bg-[#edf1f3]"><Container className="grid items-center gap-14 lg:grid-cols-2"><div><SectionHeading eyebrow="Circuit européen" title="Un circuit industriel européen volontairement court." copy="La matière est développée en France. Le corps du stylo est injecté en Italie, dans une usine spécialisée dans la fabrication d’instruments d’écriture."/></div><div className="relative min-h-96 rounded-[2rem] bg-[radial-gradient(circle_at_20%_15%,#2b678f,#123b57_68%)] p-8 shadow-[0_30px_80px_rgba(23,72,106,.18)] text-white"><div className="absolute left-[25%] top-[40%]"><span className="block size-4 rounded-full bg-[#9fc4d8] ring-8 ring-[#9fc4d8]/20"/><b className="mt-3 block">Région lyonnaise</b><small>Matière · France</small></div><div className="absolute bottom-[26%] right-[22%]"><span className="block size-4 rounded-full bg-[#9fc4d8] ring-8 ring-[#9fc4d8]/20"/><b className="mt-3 block">Région de Turin</b><small>Injection · Italie</small></div><svg aria-hidden viewBox="0 0 400 300" className="h-full w-full opacity-20"><path fill="none" stroke="white" strokeWidth="2" d="M49 112l48-56 69 7 48-33 74 32 58 65-39 49 15 70-65 18-42-36-64 26-54-47z"/></svg></div></Container></section>; }
 
-export function ProductShowcase() { return <section className="section bg-white"><Container><div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"><ProductVisual className="overflow-hidden rounded-[2rem] border border-black/5 bg-[#eeeeef] shadow-[0_28px_80px_rgba(0,0,0,.10)] md:rounded-[2.5rem]"><Image src="/images/un1qpen-perspective.png" alt="Vue rapprochée en perspective du stylo UN1QPEN et de son clip transparent" width={2098} height={754} sizes="(max-width: 1024px) 100vw, 50vw" className="h-full min-h-[280px] w-full object-cover md:min-h-[420px]"/></ProductVisual><div><SectionHeading eyebrow="Le produit" title="Un objet utile, pensé pour être vu."/><ul className="grid gap-4">{productFeatures.map(f=><li className="flex gap-3" key={f}><Check className="mt-1 shrink-0 text-[#17486a]" size={18}/>{f}</li>)}</ul><p className="copy mt-6 text-sm">Le clip et les éléments techniques ne sont actuellement pas fabriqués dans la matière textile recyclée.</p><div className="mt-8 flex flex-wrap gap-3"><Button href="/documents/fiche-technique-un1qpen.pdf">Télécharger la fiche technique</Button><Button href="/contact?type=sample" variant="ghost">Recevoir un échantillon</Button></div></div></div></Container></section>; }
+export function ProductShowcase() { return <section className="section bg-white"><Container><div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"><ProductVisual className="overflow-hidden rounded-[2rem] border border-black/5 bg-[#eeeeef] shadow-[0_28px_80px_rgba(0,0,0,.10)] md:rounded-[2.5rem]"><Image src="/images/un1qpen-color-warm-grey.png" alt="Vue rapprochée en perspective du stylo UN1QPEN Warm Grey et de son clip transparent" width={1774} height={887} sizes="(max-width: 1024px) 100vw, 50vw" className="h-full min-h-[280px] w-full object-cover md:min-h-[420px]"/></ProductVisual><div><SectionHeading eyebrow="Le produit" title="Un objet utile, pensé pour être vu."/><ul className="grid gap-4">{productFeatures.map(f=><li className="flex gap-3" key={f}><Check className="mt-1 shrink-0 text-[#17486a]" size={18}/>{f}</li>)}</ul><p className="copy mt-6 text-sm">Le clip et les éléments techniques ne sont actuellement pas fabriqués dans la matière textile recyclée.</p><div className="mt-8 flex flex-wrap gap-3"><Button href="/documents/fiche-technique-un1qpen.pdf">Télécharger la fiche technique</Button><Button href="/contact?type=sample" variant="ghost">Recevoir un échantillon</Button></div></div></div></Container></section>; }
 
 export function MaterialTouchSection() { return <section className="textile-surface section bg-[linear-gradient(135deg,#eef3f6,#cbdbe4)] text-[#1d1d1f]"><Container><p className="eyebrow">Expérience matière</p><div className="mt-6 grid gap-12 lg:grid-cols-[1.4fr_.6fr]"><h2 className="h2">Une matière qui se remarque aussi au toucher.</h2><p className="text-lg leading-relaxed text-[#53606a]">La matière épouse finement les détails du moule et donne au corps du stylo un aspect doux et soyeux, différent des plastiques classiques.</p></div></Container></section>; }
 
