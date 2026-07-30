@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb, MapPin, PenLine, Recycle, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/animations/AnimatedReveal";
 import { Button, Card, Container, SectionHeading } from "@/components/ui";
@@ -72,6 +72,61 @@ export function ValuePillars() { return <section className="section bg-white"><C
 export function KeyFigures() { return <section className="section bg-[#e7eef2] text-[#1d1d1f]"><Container><SectionHeading eyebrow="Repères" title="Une innovation déjà concrète." copy="Plus de solutions, moins de pollution !"/><div className="grid border-l border-[#17486a]/20 sm:grid-cols-2 lg:grid-cols-4">{statistics.map((s,i)=><AnimatedReveal delay={i*.08} key={s.value} className="border-r border-y border-[#17486a]/20 p-7"><strong className="text-4xl text-[#17486a]">{s.value}</strong><p className="mt-5 text-sm leading-relaxed text-[#555b60]">{s.label}{"detail" in s && s.detail ? <span className="mt-1 block">{s.detail}</span> : null}</p></AnimatedReveal>)}</div></Container></section>; }
 
 export function MaterialProcess() { return <section className="section"><Container><SectionHeading eyebrow="Transformation" title="Du textile à l’objet, en cinq gestes."/><ol className="grid gap-0 lg:grid-cols-5">{process.map(([n,t,d],i)=><AnimatedReveal delay={i*.08} key={n} className="relative border-l border-[#17486a] p-6 lg:border-l-0 lg:border-t"><span className="text-xs font-bold text-[#17486a]">{n}</span><h3 className="mt-7 text-xl font-semibold">{t}</h3><p className="mt-3 text-sm leading-relaxed text-[#555b60]">{d}</p></AnimatedReveal>)}</ol></Container></section>; }
+
+export function TextilePetStorySection() {
+  return <section className="section overflow-hidden bg-[#f7f6f3] text-[#1d1d1f]">
+    <Container>
+      <AnimatedReveal>
+        <p className="eyebrow text-[#17486a]">Comprendre la différence</p>
+        <h2 className="mt-6 max-w-5xl font-[var(--font-display)] text-[clamp(2.7rem,6vw,6rem)] leading-[.98] tracking-[-.055em]">
+          Une même famille de matière. Deux histoires très différentes.
+        </h2>
+        <p className="copy mt-8 max-w-3xl text-lg">
+          Le polyester utilisé dans les textiles et le PET des bouteilles sont chimiquement très proches. Leur différence vient principalement de leur usage initial et de leur forme.
+        </p>
+      </AnimatedReveal>
+
+      <div className="mt-14 grid gap-4 md:grid-cols-2">
+        <AnimatedReveal>
+          <article className="h-full rounded-[2rem] border border-[#dcdad4] bg-white p-8 md:p-10">
+            <Milk className="text-[#17486a]" size={30} strokeWidth={1.5}/>
+            <p className="eyebrow mt-12">Bouteille</p>
+            <h3 className="mt-3 text-3xl font-semibold tracking-[-.035em]">Du PET sous forme rigide</h3>
+            <p className="copy mt-5">Transparent et résistant, il bénéficie déjà d’une filière de recyclage largement connue et développée.</p>
+          </article>
+        </AnimatedReveal>
+        <AnimatedReveal delay={.08}>
+          <article className="h-full rounded-[2rem] border border-[#17486a]/20 bg-[#e7eef2] p-8 md:p-10">
+            <Shirt className="text-[#17486a]" size={30} strokeWidth={1.5}/>
+            <p className="eyebrow mt-12">Textile</p>
+            <h3 className="mt-3 text-3xl font-semibold tracking-[-.035em]">Du PET sous forme de fibres</h3>
+            <p className="copy mt-5">Filé, tissé ou tricoté, il est plus complexe à valoriser lorsqu’il devient un déchet textile industriel.</p>
+          </article>
+        </AnimatedReveal>
+      </div>
+
+      <AnimatedReveal className="mt-4 rounded-[2rem] bg-[#17486a] px-7 py-12 text-white md:px-12 md:py-16">
+        <p className="max-w-5xl font-[var(--font-serif)] text-[clamp(2.4rem,5vw,5.4rem)] leading-[1.02] tracking-[-.035em]">
+          « Une bouteille en plastique devient souvent un vêtement. Un1qpen fait l’inverse : un textile devient un objet durable du quotidien. »
+        </p>
+      </AnimatedReveal>
+
+      <div className="mt-16 grid gap-8 border-t border-[#17486a]/20 pt-10 lg:grid-cols-[.7fr_1.3fr]">
+        <AnimatedReveal>
+          <p className="eyebrow text-[#17486a]">La véritable innovation</p>
+        </AnimatedReveal>
+        <AnimatedReveal delay={.08}>
+          <h3 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.035em] md:text-5xl">
+            Partir d’un déchet textile, plutôt que d’une bouteille.
+          </h3>
+          <p className="copy mt-7 max-w-2xl text-lg">
+            Nous donnons une seconde vie à des textiles industriels riches en polyester en les transformant en une nouvelle matière destinée à fabriquer le corps de Un1qpen.
+          </p>
+        </AnimatedReveal>
+      </div>
+    </Container>
+  </section>;
+}
 
 export function WorkshopSection() {
   return <section className="section overflow-hidden bg-[#eef2f4]">
