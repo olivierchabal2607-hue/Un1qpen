@@ -49,7 +49,7 @@ test("valide un formulaire de devis complet", () => {
   const valid = {
     ...initial,
     uploadedLogo: { name: "logo.svg" },
-    customerDetails: { company: "UN1Q", firstName: "Jean", lastName: "Dupont", email: "jean@entreprise.fr", phone: "0600000000", deliveryDate: "", comment: "", consent: true },
+    customerDetails: { company: "Un1q", firstName: "Jean", lastName: "Dupont", email: "jean@entreprise.fr", phone: "0600000000", deliveryDate: "", comment: "", consent: true },
   };
   assert.equal(validateQuoteDraft(valid), "");
 });

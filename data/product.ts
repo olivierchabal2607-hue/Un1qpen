@@ -11,18 +11,18 @@ export const colors = [
     name: "Warm Grey",
     marking: "Marquage blanc",
     image: "/images/un1qpen-color-warm-grey.png",
-    alt: "Stylo UN1QPEN Warm Grey avec marquage blanc",
+    alt: "Stylo Un1qpen Warm Grey avec marquage blanc",
   },
   {
     name: "Blanc",
     marking: "Marquage noir",
     image: "/images/un1qpen-color-white.png",
-    alt: "Stylo UN1QPEN blanc avec marquage noir",
+    alt: "Stylo Un1qpen blanc avec marquage noir",
   },
   {
     name: "Noir",
     marking: "Marquage blanc",
     image: "/images/un1qpen-color-black.png",
-    alt: "Stylo UN1QPEN noir avec marquage blanc",
+    alt: "Stylo Un1qpen noir avec marquage blanc",
   },
 ] as const;

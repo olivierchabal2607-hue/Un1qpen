@@ -16,7 +16,7 @@ export const workshopPhotos = [
   },
   {
     src: "/images/fabrication/stylos-granules-real.jpeg",
-    alt: "Stylos UN1QPEN posés sur les granulés de matière",
+    alt: "Stylos Un1qpen posés sur les granulés de matière",
     label: "04 · Le produit obtenu",
   },
 ] as const;

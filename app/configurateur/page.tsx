@@ -3,7 +3,7 @@ import { Container } from "@/components/ui";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Configurez votre UN1QPEN",
+  "Configurez votre Un1qpen",
   "Choisissez le coloris, importez votre logo et préparez votre demande de devis personnalisée.",
   "/configurateur",
 );
@@ -13,7 +13,7 @@ export default function ConfiguratorPage() {
     <section className="pb-12 pt-32 md:pb-16 md:pt-40">
       <Container>
         <p className="eyebrow">Personnalisation professionnelle</p>
-        <h1 className="mt-5 max-w-5xl font-[var(--font-display)] text-[clamp(2.8rem,7vw,6.5rem)] leading-[.95] tracking-[-.055em]">Configurez votre UN1QPEN</h1>
+        <h1 className="mt-5 max-w-5xl font-[var(--font-display)] text-[clamp(2.8rem,7vw,6.5rem)] leading-[.95] tracking-[-.055em]">Configurez votre Un1qpen</h1>
         <p className="copy mt-7 max-w-2xl">Choisissez votre coloris, positionnez votre logo et transmettez une configuration complète à notre équipe.</p>
       </Container>
     </section>

@@ -128,7 +128,7 @@ export function PenPreview({ state, onPositionChange, onViewChange }: Props) {
     >
       <Image
         src={getViewImage(state.penColor, state.activeView)}
-        alt={`UN1QPEN ${view.label}, coloris ${state.penColor}`}
+        alt={`Un1qpen ${view.label}, coloris ${state.penColor}`}
         fill
         priority
         sizes="(max-width: 1024px) 70vw, 34vw"

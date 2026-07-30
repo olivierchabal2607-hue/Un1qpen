@@ -1,6 +1,6 @@
 export const statistics = [
   { value: "≈ 95 %", label: "de matière issue de textile recyclé dans la matière du corps" },
-  { value: "+ 300 000", label: "stylos déjà produits et vendus" },
-  { value: "2 pays", label: "dans le circuit industriel principal : France et Italie" },
-  { value: "1er chapitre", label: "d’une future gamme d’objets UN1Q" },
+  { value: "1 départ fulgurant", label: "depuis le lancement en France en avril 2026" },
+  { value: "2 Pays en 2026", label: "France et Italie", detail: "Lancement Europe en 2027" },
+  { value: "1er chapitre", label: "d’une future gamme d’objets Un1q" },
 ];

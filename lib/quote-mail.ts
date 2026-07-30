@@ -12,7 +12,7 @@ function escapeHtml(value = "") { return value.replace(/[&<>"']/g, character => 
 export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: QuoteFile, preview?: QuoteFile) {
   if (process.env.EMAIL_PROVIDER !== "resend") {
     if (process.env.NODE_ENV === "development") {
-      console.info("UN1QPEN quote request (development only)", { ...configuration, customerDetails: { ...configuration.customerDetails, email: "[redacted]", phone: "[redacted]" }, logo: logo.filename, preview: preview?.filename });
+      console.info("Un1qpen quote request (development only)", { ...configuration, customerDetails: { ...configuration.customerDetails, email: "[redacted]", phone: "[redacted]" }, logo: logo.filename, preview: preview?.filename });
       return { accepted: true, simulated: true };
     }
     throw new Error("Le service d’envoi de devis n’est pas configuré.");
@@ -21,7 +21,7 @@ export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: 
   if (!apiKey) throw new Error("Le service d’envoi de devis n’est pas configuré.");
   const resend = new Resend(apiKey);
   const recipient = process.env.CONTACT_EMAIL || "contact@un1qpen.fr";
-  const from = process.env.EMAIL_FROM || "UN1QPEN <site@un1qpen.com>";
+  const from = process.env.EMAIL_FROM || "Un1qpen <site@un1qpen.com>";
   const customer = configuration.customerDetails;
   const rows = [
     ["Société", customer.company], ["Contact", `${customer.firstName} ${customer.lastName}`],
@@ -37,9 +37,9 @@ export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: 
   const attachments = [logo, ...(preview ? [preview] : [])];
   const { data, error } = await resend.emails.send({
     from, to: recipient, replyTo: customer.email,
-    subject: `[UN1QPEN] Demande de devis — ${customer.company} — ${configuration.quantity} pièces`,
+    subject: `[Un1qpen] Demande de devis — ${customer.company} — ${configuration.quantity} pièces`,
     text: `${rows.map(([key, value]) => `${key} : ${value}`).join("\n")}\n\nCommentaire :\n${customer.comment || "Aucun commentaire"}`,
-    html: `<div style="font-family:Arial,sans-serif;color:#1d1d1f;line-height:1.6"><h1>Nouvelle configuration UN1QPEN</h1><table style="border-collapse:collapse;width:100%;max-width:720px">${rows.map(([key, value]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;color:#555">${escapeHtml(key)}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd"><strong>${escapeHtml(value)}</strong></td></tr>`).join("")}</table><h2 style="margin-top:28px;font-size:18px">Commentaire</h2><p style="white-space:pre-wrap">${escapeHtml(customer.comment || "Aucun commentaire")}</p></div>`,
+    html: `<div style="font-family:Arial,sans-serif;color:#1d1d1f;line-height:1.6"><h1>Nouvelle configuration Un1qpen</h1><table style="border-collapse:collapse;width:100%;max-width:720px">${rows.map(([key, value]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;color:#555">${escapeHtml(key)}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd"><strong>${escapeHtml(value)}</strong></td></tr>`).join("")}</table><h2 style="margin-top:28px;font-size:18px">Commentaire</h2><p style="white-space:pre-wrap">${escapeHtml(customer.comment || "Aucun commentaire")}</p></div>`,
     attachments,
   });
   if (error) throw new Error(`Resend delivery failed: ${error.message}`);

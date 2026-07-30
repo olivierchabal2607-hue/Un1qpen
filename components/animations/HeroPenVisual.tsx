@@ -29,7 +29,7 @@ export function HeroPenVisual() {
       >
         <Image
           src="/images/un1qpen-profile.png"
-          alt="Stylo UN1QPEN vu de profil, corps gris textile et clip transparent"
+          alt="Stylo Un1qpen vu de profil, corps gris textile et clip transparent"
           width={2122}
           height={694}
           priority

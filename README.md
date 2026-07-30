@@ -1,4 +1,4 @@
-# UN1QPEN
+# Un1qpen
 
 ## Configurateur de personnalisation
 
@@ -35,7 +35,7 @@ Variables nécessaires en production :
 ```env
 EMAIL_PROVIDER=resend
 RESEND_API_KEY=re_xxxxxxxxx
-EMAIL_FROM=UN1QPEN <site@un1qpen.com>
+EMAIL_FROM=Un1qpen <site@un1qpen.com>
 CONTACT_EMAIL=contact@un1qpen.fr
 NEXT_PUBLIC_SITE_URL=https://un1qpen.com
 ```
@@ -51,7 +51,7 @@ Les choix du configurateur et les coordonnées saisies sont conservés dans
 persistés afin d’éviter de stocker un fichier volumineux ou un consentement
 obsolète dans le navigateur.
 
-Site vitrine B2B premium pour présenter l’innovation matière UN1QPEN.
+Site vitrine B2B premium pour présenter l’innovation matière Un1qpen.
 
 ## Lancer le projet
 

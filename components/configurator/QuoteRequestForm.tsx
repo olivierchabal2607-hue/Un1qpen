@@ -65,7 +65,7 @@ export function QuoteRequestForm({ state, onCustomerChange, createPreview }: Pro
 
   if (status === "success") return <div className="rounded-[1.75rem] border border-[#cddfd2] bg-[#edf5ef] p-8" role="status">
     <CheckCircle2 size={38} className="text-[#17486a]"/>
-    <h2 className="mt-5 text-2xl font-semibold">Votre UN1QPEN est prêt à être étudié !</h2>
+    <h2 className="mt-5 text-2xl font-semibold">Votre Un1qpen est prêt à être étudié !</h2>
     <p className="mt-3 leading-relaxed text-[#555b60]">Nous avons bien reçu votre configuration. Notre équipe vérifiera la faisabilité du marquage avant de vous transmettre un devis et un BAT professionnel.</p>
     <p className="mt-5 text-sm font-semibold">Simulation non contractuelle. Le rendu final sera validé par un BAT.</p>
   </div>;

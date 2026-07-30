@@ -35,7 +35,7 @@ export async function sendContactRequest(data: ContactInput) {
 
   const resend = new Resend(apiKey);
   const recipient = process.env.CONTACT_EMAIL || "contact@un1qpen.fr";
-  const from = process.env.EMAIL_FROM || "UN1QPEN <site@un1qpen.com>";
+  const from = process.env.EMAIL_FROM || "Un1qpen <site@un1qpen.com>";
   const requestType = requestLabels[data.requestType] || data.requestType;
   const fullName = `${data.firstName} ${data.lastName}`;
   const rows = [
@@ -53,10 +53,10 @@ export async function sendContactRequest(data: ContactInput) {
     from,
     to: recipient,
     replyTo: data.email,
-    subject: `[UN1QPEN] ${requestType} — ${data.company}`,
+    subject: `[Un1qpen] ${requestType} — ${data.company}`,
     text: `${rows.map(([label, value]) => `${label} : ${value}`).join("\n")}\n\nMessage :\n${data.message}`,
     html: `<div style="font-family:Arial,sans-serif;color:#1d1d1f;line-height:1.6">
-      <h1 style="font-size:24px">Nouvelle demande UN1QPEN</h1>
+      <h1 style="font-size:24px">Nouvelle demande Un1qpen</h1>
       <table style="border-collapse:collapse;width:100%;max-width:680px">
         ${rows.map(([label, value]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #ddd;color:#555">${escapeHtml(label)}</td><td style="padding:8px 12px;border-bottom:1px solid #ddd"><strong>${escapeHtml(value)}</strong></td></tr>`).join("")}
       </table>
@@ -71,13 +71,13 @@ export async function sendContactRequest(data: ContactInput) {
     from,
     to: data.email,
     replyTo: recipient,
-    subject: "Nous avons bien reçu votre demande — UN1QPEN",
-    text: `Bonjour ${data.firstName},\n\nVotre demande a bien été transmise à l’équipe UN1QPEN. Nous reviendrons vers vous prochainement.\n\nPlus de solutions, moins de pollution.\nUN1QPEN`,
+    subject: "Nous avons bien reçu votre demande — Un1qpen",
+    text: `Bonjour ${data.firstName},\n\nVotre demande a bien été transmise à l’équipe Un1qpen. Nous reviendrons vers vous prochainement.\n\nPlus de solutions, moins de pollution.\nUn1qpen`,
     html: `<div style="font-family:Arial,sans-serif;color:#1d1d1f;line-height:1.7">
       <p>Bonjour ${escapeHtml(data.firstName)},</p>
-      <p>Votre demande a bien été transmise à l’équipe UN1QPEN. Nous reviendrons vers vous prochainement.</p>
+      <p>Votre demande a bien été transmise à l’équipe Un1qpen. Nous reviendrons vers vous prochainement.</p>
       <p style="margin-top:28px;color:#17486a"><strong>Plus de solutions, moins de pollution.</strong></p>
-      <p>UN1QPEN</p>
+      <p>Un1qpen</p>
     </div>`,
   });
 
