@@ -171,12 +171,12 @@ export function EuropeOriginSection() {
       <div>
         <SectionHeading eyebrow="Circuit européen" title="Un circuit industriel européen volontairement court." copy="La matière est développée en France. Le corps du stylo est injecté en Italie, dans une usine spécialisée dans la fabrication d’instruments d’écriture."/>
       </div>
-      <AnimatedReveal className="overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-[0_30px_80px_rgba(23,72,106,.14)]">
+      <AnimatedReveal>
         <Image
-          src="/images/circuit-industriel-europeen.jpg"
+          src="/images/circuit-industriel-europeen-clean.jpg"
           alt="Présentation du circuit industriel européen de Un1qpen entre Lyon et Turin"
-          width={1536}
-          height={1024}
+          width={1516}
+          height={960}
           sizes="(max-width: 1024px) 100vw, 68vw"
           className="h-auto w-full"
         />
