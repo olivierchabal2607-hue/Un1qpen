@@ -12,6 +12,6 @@ export function Button({ href, children, variant = "dark" }: { href: string; chi
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <article className={`rounded-[var(--radius)] border border-[#e4e1da] bg-white/88 p-7 shadow-[0_18px_60px_rgba(32,48,58,.055)] backdrop-blur-xl ${className}`}>{children}</article>;
 }
-export function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
-  return <div className="mb-14 max-w-4xl"><p className="eyebrow mb-5">{eyebrow}</p><h2 className="h2">{title}</h2>{copy && <p className="copy mt-7 max-w-2xl">{copy}</p>}</div>;
+export function SectionHeading({ title, copy }: { eyebrow?: string; title: string; copy?: string }) {
+  return <div className="mb-14 max-w-4xl"><h2 className="h2">{title}</h2>{copy && <p className="copy mt-7 max-w-2xl">{copy}</p>}</div>;
 }
