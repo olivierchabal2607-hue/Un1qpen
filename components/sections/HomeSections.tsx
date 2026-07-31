@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Smile, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/animations/AnimatedReveal";
 import { Button, Card, Container, SectionHeading } from "@/components/ui";
@@ -33,6 +33,7 @@ export function HeroSection() {
     [PenLine, "Vos idées", "Personnalisables à l’infini", null],
     [Globe2, "Impact environnemental minimal", "Bilan carbone ultra-faible", null],
     [Lightbulb, "L’objet média", "Qui répond à toutes vos attentes RSE !", null],
+    [Smile, "Une expérience", "d’écriture XXL", null],
   ] as const;
   return <section className="hero-home relative flex min-h-[100svh] items-center overflow-hidden bg-[#f7f6f3] pb-7 pt-24 text-[#1d1d1f]">
     <div className="hero-visual absolute inset-y-[5%] right-0 w-[92%] bg-[#f7f6f3]">
