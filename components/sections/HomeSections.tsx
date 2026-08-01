@@ -192,7 +192,26 @@ export function MaterialTouchSection() { return <section className="textile-surf
 
 export function ProductComparison() { const rows=[["Plastique vierge","Matière neuve","Référence classique — fabrication Asie","L to XXL"],["Plastique recyclé","Plastique revalorisé","Bouteilles plastiques — fabrication Europe","XS to L"],["Un1qpen","Origine textile recyclée","Récit matière, conception et matière France — injection Italie","XXS"]]; return <section className="section"><Container><SectionHeading eyebrow="La différence" title="Trois approches. Une origine singulière. Plus de solutions, moins de pollution !" copy="Un1qpen complète les solutions existantes par l’origine textile de sa matière et la force de son récit."/><div className="overflow-x-auto"><table className="w-full min-w-[760px] border-collapse text-left"><thead><tr className="border-b border-[#1d1d1f] text-xs uppercase tracking-widest"><th className="py-5">Solution</th><th>Origine du corps</th><th>Point distinctif</th><th>Tailles de pollution</th></tr></thead><tbody>{rows.map((r,i)=><tr key={r[0]} className={i===2?"bg-white font-semibold":"border-b border-[#d2d2d7]"}>{r.map((c,j)=><td className={`p-5 ${j===3?"text-xl font-semibold text-[#17486a]":""}`} key={c}>{c}</td>)}</tr>)}</tbody></table></div></Container></section>; }
 
-export function BrandVisionSection() { const cards=[["01","Un1qpen","Premier modèle"],["02","Un2qpen","Prochain développement · vision"],["∞","Un1q Objects","Futurs objets · vision"]]; return <section className="section bg-[#17486a] text-white"><Container><SectionHeading eyebrow="La vision" title="Le premier produit d’une nouvelle génération d’objets." copy="Un1qpen est la première démonstration d’une ambition plus large : donner une nouvelle fonction à des matières issues de textiles recyclés et les transformer en objets utiles, désirables et personnalisables."/><div className="grid gap-4 md:grid-cols-3">{cards.map(c=><div key={c[1]} className="rounded-3xl border border-white/20 p-8"><span className="text-[#9fc4d8]">{c[0]}</span><h3 className="mt-20 text-2xl">{c[1]}</h3><p className="mt-2 text-sm text-white/50">{c[2]}</p></div>)}</div></Container></section>; }
+export function BrandVisionSection() {
+  return <section className="section bg-[#17486a] text-white">
+    <Container>
+      <AnimatedReveal className="max-w-4xl">
+        <h2 className="h2">Le premier produit d’une nouvelle génération d’objets.</h2>
+        <div className="mt-7 max-w-2xl space-y-7">
+          <p className="copy text-white/78">Un1qpen est la première démonstration d’une volonté plus large : donner une nouvelle fonction à des matières issues de textiles recyclés et les transformer en objets utiles, désirables et personnalisables.</p>
+          <div className="space-y-7">
+            <p className="copy text-white/78">Le projet Un1q’Objects a pour ambition de poursuivre l’innovation avec comme objectif majeur : préserver notre planète !</p>
+            <div>
+              <p className="copy text-white/78">Des idées, pas de pétrole !</p>
+              <p className="copy text-white/78">Bientôt de nouveaux projets verront le jour…</p>
+              <p className="copy text-white/78">Parce que plus de solutions, c’est moins de pollution : restez connectés !</p>
+            </div>
+          </div>
+        </div>
+      </AnimatedReveal>
+    </Container>
+  </section>;
+}
 
 export function ProfessionalSection() { const args=["Produit différenciant","Discours immédiatement compréhensible","Forte valeur narrative","Fabrication européenne","Personnalisation","Échantillons sur demande"]; return <section className="section bg-white"><Container><SectionHeading eyebrow="B2B" title="Une innovation pensée pour les professionnels de l’objet média."/><div className="grid gap-12 lg:grid-cols-2"><div className="grid gap-3 sm:grid-cols-2">{args.map(a=><Card key={a}><p className="font-semibold">{a}</p></Card>)}</div><div className="self-center"><p className="copy">Un support visible, quotidien et pertinent pour les campagnes RSE, les lancements, les événements et la communication interne.</p><div className="mt-8 flex flex-wrap gap-3"><Button href="/contact?type=sample">Recevoir un échantillon</Button><Button href="/contact?type=partner" variant="ghost">Devenir partenaire</Button></div></div></div></Container></section>; }
 
