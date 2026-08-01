@@ -28,11 +28,11 @@ export function HeroSection() {
   const points = [
     [RtexIcon, "RTEX", "Textile recyclé en France", null],
     [Recycle, "Matière issue du recyclage", "À 95 %", null],
-    [Sparkles, "Sans nouveau pétrole", "Pour le corps du stylo", null],
+    [Sparkles, "Sans pétrole ajouté", "Pour le corps du stylo", null],
     [MapPin, "Circuit ultra-court", "100 % made in Europe", null],
     [PenLine, "Vos idées", "Personnalisables à l’infini", null],
-    [Globe2, "Impact environnemental minimal", "Bilan carbone ultra-faible", null],
-    [Lightbulb, "L’objet média", "Qui répond à toutes vos attentes RSE !", null],
+    [Globe2, "Impact environnemental XXS", "Bilan carbone ultra-faible", null],
+    [Lightbulb, "L’objet média", "Qui répond à toutes vos exigences RSE !", null],
     [Smile, "Une expérience", "d’écriture XXL", null],
   ] as const;
   return <section className="hero-home relative flex min-h-[100svh] items-center overflow-hidden bg-[#f7f6f3] pb-7 pt-24 text-[#1d1d1f]">
@@ -42,7 +42,7 @@ export function HeroSection() {
     <div className="hero-shade absolute inset-0 bg-[linear-gradient(90deg,rgba(247,246,243,.98)_0%,rgba(247,246,243,.94)_34%,rgba(247,246,243,.62)_48%,rgba(247,246,243,0)_66%)]"/>
     <Container className="hero-container relative z-10">
       <AnimatedReveal className="max-w-[680px]">
-        <h1 className="hero-title font-[var(--font-display)] text-[clamp(2.7rem,4.25vw,4.8rem)] leading-[1.01] tracking-[-.055em]">Le premier stylo au monde qui écrit une nouvelle histoire au <span className="text-[#17486a]">textile&nbsp;!</span></h1>
+        <h1 className="hero-title font-[var(--font-display)] text-[clamp(2.7rem,4.25vw,4.8rem)] leading-[1.01] tracking-[-.055em]">Le premier stylo au monde qui écrit une nouvelle page au <span className="text-[#17486a]">textile&nbsp;!</span></h1>
         <p className="hero-intro mt-5 max-w-xl text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-[#40464b]">Un textile industriel destiné à être éliminé devient le corps d’un stylo conçu pour communiquer autrement.</p>
       </AnimatedReveal>
       <AnimatedReveal delay={.14} className="hero-details mt-6 max-w-[700px]">
@@ -59,11 +59,11 @@ export function HeroSection() {
   </section>;
 }
 
-export function ManifestoSection() { return <section id="decouvrir" className="section bg-[#f7f6f3]"><Container><AnimatedReveal><p className="max-w-6xl font-[var(--font-serif)] text-[clamp(2.7rem,6vw,6.5rem)] leading-[1.02] tracking-[-.04em]">« D’un textile industriel destiné à être éliminé, nous avons choisi d’écrire une autre destinée. »</p><p className="copy ml-auto mt-12 max-w-xl border-l border-[#17486a]/25 pl-6">Un1qpen transforme une matière issue de déchets textiles industriels en un objet utile, personnalisable et visible au quotidien.</p></AnimatedReveal></Container></section>; }
+export function ManifestoSection() { return <section id="decouvrir" className="section bg-[#f7f6f3]"><Container><AnimatedReveal><p className="max-w-6xl font-[var(--font-serif)] text-[clamp(2.7rem,6vw,6.5rem)] leading-[1.02] tracking-[-.04em]">« D’un textile industriel destiné à être éliminé, nous avons choisi d’écrire <span className="whitespace-nowrap">une autre page. »</span></p><p className="copy ml-auto mt-12 max-w-xl border-l border-[#17486a]/25 pl-6">Un1qpen transforme une matière issue de déchets textiles industriels en un objet utile, personnalisable et visible au quotidien.</p></AnimatedReveal></Container></section>; }
 
 const pillars = [
   [Recycle, "Textile recyclé", "Le corps utilise une matière issue de textiles industriels recyclés, fortement chargés en polyester."],
-  [Sparkles, "Sans nouveau pétrole pour le corps", "Une matière existante remplace le plastique vierge pour cette partie du produit."],
+  [Sparkles, "Sans pétrole ajouté pour le corps", "Une matière existante remplace le plastique vierge pour cette partie du produit."],
   [Factory, "Fabrication européenne", "La matière est développée en France et le corps du stylo est injecté en Italie."],
   [Fingerprint, "Une histoire tangible", "Un support de communication concret, tactile et immédiatement compréhensible."],
 ];
