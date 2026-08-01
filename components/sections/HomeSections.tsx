@@ -42,7 +42,7 @@ export function HeroSection() {
     <div className="hero-shade absolute inset-0 bg-[linear-gradient(90deg,rgba(247,246,243,.98)_0%,rgba(247,246,243,.94)_34%,rgba(247,246,243,.62)_48%,rgba(247,246,243,0)_66%)]"/>
     <Container className="hero-container relative z-10">
       <AnimatedReveal className="max-w-[680px]">
-        <h1 className="hero-title font-[var(--font-display)] text-[clamp(2.7rem,4.25vw,4.8rem)] leading-[1.01] tracking-[-.055em]">Le premier stylo au monde qui écrit une nouvelle page au <span className="text-[#17486a]">textile&nbsp;!</span></h1>
+        <h1 className="hero-title font-[var(--font-display)] text-[clamp(2.7rem,4.25vw,4.8rem)] leading-[1.01] tracking-[-.055em]">Le premier stylo au monde qui écrit une nouvelle destinée au <span className="text-[#17486a]">textile&nbsp;!</span></h1>
         <p className="hero-intro mt-5 max-w-xl text-[clamp(1rem,1.15vw,1.125rem)] leading-relaxed text-[#40464b]">Un textile industriel destiné à être éliminé devient le corps d’un stylo conçu pour communiquer autrement.</p>
       </AnimatedReveal>
       <AnimatedReveal delay={.14} className="hero-details mt-6 max-w-[700px]">
