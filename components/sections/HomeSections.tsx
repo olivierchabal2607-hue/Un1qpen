@@ -2,7 +2,6 @@ import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/animations/AnimatedReveal";
 import { Button, Card, Container, SectionHeading } from "@/components/ui";
-import { statistics } from "@/data/statistics";
 import { process } from "@/data/process";
 import { productFeatures } from "@/data/product";
 import { faqs } from "@/data/faq";
@@ -69,7 +68,7 @@ const pillars = [
 ];
 export function ValuePillars() { return <section className="section bg-white"><Container><SectionHeading eyebrow="La proposition" title="Plus qu’un stylo recyclé : une histoire à transmettre."/><div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">{pillars.map(([Icon,title,text],i)=><AnimatedReveal delay={i*.06} key={String(title)}><Card className="h-full"><Icon size={24}/><h3 className="mt-8 text-xl font-semibold">{String(title)}</h3><p className="mt-4 leading-relaxed text-[#555b60]">{String(text)}</p></Card></AnimatedReveal>)}</div></Container></section>; }
 
-export function KeyFigures() { return <section className="section bg-[#e7eef2] text-[#1d1d1f]"><Container><SectionHeading eyebrow="Repères" title="Une innovation déjà concrète." copy="Plus de solutions, moins de pollution !"/><div className="grid border-l border-[#17486a]/20 sm:grid-cols-2 lg:grid-cols-4">{statistics.map((s,i)=><AnimatedReveal delay={i*.08} key={s.value} className="border-r border-y border-[#17486a]/20 p-7"><strong className="text-4xl text-[#17486a]">{s.value}</strong><p className="mt-5 text-sm leading-relaxed text-[#555b60]">{s.label}{"detail" in s && s.detail ? <span className="mt-1 block">{s.detail}</span> : null}</p></AnimatedReveal>)}</div></Container></section>; }
+export function KeyFigures() { return <section className="section bg-[#e7eef2] text-[#1d1d1f]"><Container><AnimatedReveal className="max-w-4xl"><h2 className="h2">Une innovation déjà en marche et adoptée.</h2><div className="mt-8 max-w-3xl space-y-6"><p className="copy">Depuis son lancement, UN1QPEN connaît un démarrage très prometteur.</p><p className="copy">Les premières commercialisations enregistrent d’excellents résultats et confirment l’intérêt des entreprises pour un stylo innovant, fabriqué à partir de textile recyclé en France et injecté en Italie.</p></div></AnimatedReveal></Container></section>; }
 
 export function MaterialProcess() { return <section className="section"><Container><SectionHeading eyebrow="Transformation" title="Du textile à l’objet, en cinq gestes."/><ol className="grid gap-0 lg:grid-cols-5">{process.map(([n,t,d],i)=><AnimatedReveal delay={i*.08} key={n} className="relative border-l border-[#17486a] p-6 lg:border-l-0 lg:border-t"><span className="text-xs font-bold text-[#17486a]">{n}</span><h3 className="mt-7 text-xl font-semibold">{t}</h3><p className="mt-3 text-sm leading-relaxed text-[#555b60]">{d}</p></AnimatedReveal>)}</ol></Container></section>; }
 
