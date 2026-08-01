@@ -59,7 +59,7 @@ export function HeroSection() {
   </section>;
 }
 
-export function ManifestoSection() { return <section id="decouvrir" className="section bg-[#f7f6f3]"><Container><AnimatedReveal><p className="max-w-6xl font-[var(--font-serif)] text-[clamp(2.7rem,6vw,6.5rem)] leading-[1.02] tracking-[-.04em]">« D’un textile industriel destiné à être éliminé, nous avons choisi d’écrire <span className="whitespace-nowrap">une autre page. »</span></p><p className="copy ml-auto mt-12 max-w-xl border-l border-[#17486a]/25 pl-6">Un1qpen transforme une matière issue de déchets textiles industriels en un objet utile, personnalisable et visible au quotidien.</p></AnimatedReveal></Container></section>; }
+export function ManifestoSection() { return <section id="decouvrir" className="section bg-[#f7f6f3]"><Container><AnimatedReveal><p className="max-w-6xl font-[var(--font-serif)] text-[clamp(2.7rem,6vw,6.5rem)] leading-[1.02] tracking-[-.04em]">« D’un textile industriel destiné à être éliminé, nous avons choisi d’écrire <span className="whitespace-nowrap">une autre page. »</span></p><p className="copy ml-auto mt-12 max-w-xl border-l border-[#17486a]/25 pl-6">Un1qpen transforme une matière issue de déchets textiles industriels en un objet utile, personnalisable et utilisable au quotidien.</p></AnimatedReveal></Container></section>; }
 
 const pillars = [
   [Recycle, "Textile recyclé", "Le corps utilise une matière issue de textiles industriels recyclés, fortement chargés en polyester."],
