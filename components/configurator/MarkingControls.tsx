@@ -7,13 +7,26 @@ import {
   markingLocations,
   type LogoPosition,
   type MarkingColor,
+  type MarkingColorCount,
   type MarkingLocation,
 } from "@/data/configurator";
+import { markingColorCounts } from "@/lib/pricing.mjs";
 
-const locationLabels: Record<MarkingLocation, string> = { clip: "Sur le clip", body: "Sur le corps", both: "Clip et corps" };
+const locationLabels: Record<MarkingLocation, string> = { clip: "Sur le clip", body: "Sur le corps" };
 
 export function MarkingLocationSelector({ value, onChange }: { value: MarkingLocation; onChange: (value: MarkingLocation) => void }) {
-  return <fieldset><legend className="text-sm font-semibold">Emplacement du marquage</legend><div className="mt-3 grid gap-2 sm:grid-cols-3">{markingLocations.map(location => <button type="button" key={location} aria-pressed={value === location} onClick={() => onChange(location)} className={`min-h-12 rounded-xl border px-3 text-xs font-semibold ${value === location ? "border-[#17486a] bg-[#eef4f7]" : "border-[#dedbd4] bg-white"}`}>{locationLabels[location]}</button>)}</div></fieldset>;
+  return <fieldset><legend className="text-sm font-semibold">Emplacement du marquage</legend><div className="mt-3 grid grid-cols-2 gap-2">{markingLocations.map(location => <button type="button" key={location} aria-pressed={value === location} onClick={() => onChange(location)} className={`min-h-12 rounded-xl border px-3 text-xs font-semibold ${value === location ? "border-[#17486a] bg-[#eef4f7]" : "border-[#dedbd4] bg-white"}`}>{locationLabels[location]}</button>)}</div></fieldset>;
+}
+
+export function MarkingColorCountSelector({ value, onChange }: { value: MarkingColorCount; onChange: (value: MarkingColorCount) => void }) {
+  return <fieldset>
+    <legend className="text-sm font-semibold">Nombre de couleurs</legend>
+    <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      {markingColorCounts.map(count => <button type="button" key={count} aria-pressed={value === count} onClick={() => onChange(count)} className={`min-h-12 rounded-xl border px-3 text-xs font-semibold transition ${value === count ? "border-[#17486a] bg-[#eef4f7]" : "border-[#dedbd4] bg-white hover:border-[#17486a]/50"}`}>
+        {count} couleur{count > 1 ? "s" : ""}{count === 1 && <span className="block text-[10px] font-medium text-[#17486a]">Incluse</span>}
+      </button>)}
+    </div>
+  </fieldset>;
 }
 
 export function LogoTransformControls({

@@ -1,11 +1,14 @@
+import type { PricingQuantity } from "@/lib/pricing.mjs";
+
 export const penColors = ["white", "warmGrey", "black"] as const;
 export const markingColors = ["white", "warmGrey", "black"] as const;
-export const markingLocations = ["clip", "body", "both"] as const;
+export const markingLocations = ["clip", "body"] as const;
 export const penViews = ["view1", "view2", "view3", "view4", "view5", "view6"] as const;
 
 export type PenColor = (typeof penColors)[number];
 export type MarkingColor = (typeof markingColors)[number];
 export type MarkingLocation = (typeof markingLocations)[number];
+export type MarkingColorCount = 1 | 2 | 3 | 4;
 export type PenView = (typeof penViews)[number];
 export type LogoPosition = { x: number; y: number };
 export type LogoTransform = { scale: number; rotation: number; position: LogoPosition };
@@ -33,12 +36,13 @@ export type ConfiguratorState = {
   penColor: PenColor;
   markingColor: MarkingColor;
   markingLocation: MarkingLocation;
+  markingColorCount: MarkingColorCount;
   activeView: PenView;
   uploadedLogo: UploadedLogo | null;
   logoTransforms: Record<"clip" | "body", LogoTransform>;
   editingLocation: "clip" | "body";
   preserveRatio: boolean;
-  quantity: number;
+  quantity: PricingQuantity;
   customerDetails: CustomerDetails;
 };
 
@@ -140,6 +144,7 @@ export const initialConfiguratorState: ConfiguratorState = {
   penColor: "white",
   markingColor: "warmGrey",
   markingLocation: "clip",
+  markingColorCount: 1,
   activeView: "view2",
   uploadedLogo: null,
   logoTransforms: {
@@ -148,9 +153,8 @@ export const initialConfiguratorState: ConfiguratorState = {
   },
   editingLocation: "clip",
   preserveRatio: true,
-  quantity: 500,
+  quantity: 1000,
   customerDetails: initialCustomerDetails,
 };
 
-export const quickQuantities = [500, 1000, 2500, 5000, 10000];
 export const CONFIGURATOR_STORAGE_KEY = "un1qpen-configurator-v1";

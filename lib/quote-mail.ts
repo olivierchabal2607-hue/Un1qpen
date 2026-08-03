@@ -1,10 +1,11 @@
 import { Resend } from "resend";
 import type { QuoteConfiguration } from "./validations";
+import { calculatePrice } from "./pricing.mjs";
 
 const labels = {
   penColor: { white: "Blanc", warmGrey: "Warm Grey", black: "Noir" },
   markingColor: { white: "Blanc", warmGrey: "Warm Grey", black: "Noir" },
-  markingLocation: { clip: "Sur le clip", body: "Sur le corps", both: "Clip et corps" },
+  markingLocation: { clip: "Sur le clip", body: "Sur le corps" },
 };
 type QuoteFile = { filename: string; content: Buffer };
 function escapeHtml(value = "") { return value.replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[character] ?? character); }
@@ -23,14 +24,19 @@ export async function sendQuoteRequest(configuration: QuoteConfiguration, logo: 
   const recipient = process.env.CONTACT_EMAIL || "contact@un1qpen.fr";
   const from = process.env.EMAIL_FROM || "Un1qpen <site@un1qpen.com>";
   const customer = configuration.customerDetails;
+  const price = calculatePrice(configuration.quantity, configuration.markingColorCount);
+  const currency = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const rows = [
     ["Société", customer.company], ["Contact", `${customer.firstName} ${customer.lastName}`],
     ["E-mail", customer.email], ["Téléphone", customer.phone],
     ["Livraison souhaitée", customer.deliveryDate || "Non renseignée"],
     ["Couleur du stylo", labels.penColor[configuration.penColor]],
     ["Couleur du marquage", labels.markingColor[configuration.markingColor]],
+    ["Nombre de couleurs", configuration.markingColorCount.toString()],
     ["Emplacement", labels.markingLocation[configuration.markingLocation]],
     ["Quantité", configuration.quantity.toLocaleString("fr-FR")], ["Vue active", configuration.activeView],
+    ["Prix unitaire HT", `${currency.format(price.unitPrice)} / stylo`],
+    ["Prix total HT", currency.format(price.totalPrice)],
     ["Logo clip", `échelle ${configuration.logoTransforms.clip.scale}, rotation ${configuration.logoTransforms.clip.rotation}°, x ${configuration.logoTransforms.clip.position.x.toFixed(3)}, y ${configuration.logoTransforms.clip.position.y.toFixed(3)}`],
     ["Logo corps", `échelle ${configuration.logoTransforms.body.scale}, rotation ${configuration.logoTransforms.body.rotation}°, x ${configuration.logoTransforms.body.position.x.toFixed(3)}, y ${configuration.logoTransforms.body.position.y.toFixed(3)}`],
   ];

@@ -8,15 +8,16 @@ import {
   validateLogoFile,
   validateQuoteDraft,
 } from "../lib/configurator-rules.mjs";
+import { calculatePrice, markingColorCounts, pricingQuantities } from "../lib/pricing.mjs";
 
 const initial = {
-  penColor: "warmGrey", markingColor: "black", markingLocation: "clip", activeView: "view1",
+  penColor: "warmGrey", markingColor: "black", markingLocation: "clip", markingColorCount: 1, activeView: "view1",
   uploadedLogo: null,
   logoTransforms: {
     clip: { scale: 1, rotation: 0, position: { x: .5, y: .5 } },
     body: { scale: 1, rotation: 0, position: { x: .5, y: .5 } },
   },
-  editingLocation: "clip", preserveRatio: true, quantity: 500,
+  editingLocation: "clip", preserveRatio: true, quantity: 1000,
   customerDetails: { company: "", firstName: "", lastName: "", email: "", phone: "", deliveryDate: "", comment: "", consent: false },
 };
 
@@ -41,8 +42,25 @@ test("refuse un logo supérieur à 10 Mo", () => {
   assert.match(result.error, /10 Mo/);
 });
 
-test("refuse une quantité inférieure à 500", () => {
-  assert.match(validateQuoteDraft({ ...initial, quantity: 499 }), /500/);
+test("refuse une quantité qui ne correspond à aucun palier", () => {
+  assert.match(validateQuoteDraft({ ...initial, quantity: 999 }), /quantité proposée/);
+});
+
+test("calcule les exemples tarifaires annoncés", () => {
+  assert.deepEqual([calculatePrice(1000, 1).unitPrice, calculatePrice(1000, 2).unitPrice, calculatePrice(1000, 3).unitPrice], [1, 1.24, 1.48]);
+  assert.equal(calculatePrice(5000, 3).unitPrice, 1.14);
+  assert.equal(calculatePrice(10000, 4).unitPrice, 1.13);
+  assert.equal(calculatePrice(50000, 2).unitPrice, .46);
+});
+
+test("calcule toutes les combinaisons de quantité et de couleurs", () => {
+  for (const quantity of pricingQuantities) {
+    for (const colorCount of markingColorCounts) {
+      const result = calculatePrice(quantity, colorCount);
+      assert.equal(result.totalPrice, result.unitPrice * quantity);
+      assert.ok(result.unitPrice >= result.basePrice);
+    }
+  }
 });
 
 test("valide un formulaire de devis complet", () => {
@@ -62,4 +80,10 @@ test("persiste la configuration sans le fichier et restaure les paramètres", ()
   assert.equal(restored.penColor, "white");
   assert.equal(restored.activeView, "view5");
   assert.equal(restored.uploadedLogo, null);
+});
+
+test("remplace une ancienne quantité non tarifée lors de la restauration", () => {
+  const restored = restorePersistedState(JSON.stringify({ ...initial, quantity: 500, markingLocation: "both" }), initial);
+  assert.equal(restored.quantity, 1000);
+  assert.equal(restored.markingLocation, "clip");
 });

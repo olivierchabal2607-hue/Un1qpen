@@ -15,11 +15,12 @@ import { PenPreview } from "./PenPreview";
 import { PenViewSelector } from "./PenViewSelector";
 import { PenColorSelector } from "./PenColorSelector";
 import { LogoUploader } from "./LogoUploader";
-import { LogoTransformControls, MarkingLocationSelector } from "./MarkingControls";
+import { LogoTransformControls, MarkingColorCountSelector, MarkingLocationSelector } from "./MarkingControls";
 import { QuantitySelector } from "./QuantitySelector";
 import { QuoteRequestForm } from "./QuoteRequestForm";
+import { PricingSummary } from "./PricingSummary";
 
-const steps = ["Modèle", "Couleur", "Logo", "Marquage", "Quantité", "Demande de devis"];
+const steps = ["Modèle", "Couleur", "Logo", "Marquage", "Quantité", "Prix", "Demande de devis"];
 
 function loadImage(source: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
@@ -72,8 +73,7 @@ export function PenConfigurator() {
       context.drawImage(pen, (canvas.width - drawWidth) / 2, (canvas.height - drawHeight) / 2, drawWidth, drawHeight);
       if (state.uploadedLogo?.previewUrl) {
         const logo = await loadImage(state.uploadedLogo.previewUrl);
-        const locations = state.markingLocation === "both" ? ["clip", "body"] as const : [state.markingLocation] as const;
-        for (const location of locations) {
+        for (const location of [state.markingLocation]) {
           const zone = printZones[state.penColor][state.activeView][location];
           if (!zone.width || !zone.height) continue;
           const transform = state.logoTransforms[location];
@@ -117,13 +117,14 @@ export function PenConfigurator() {
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">01 — Modèle</p><h2 className="text-xl font-semibold">Un1qpen</h2><p className="mt-2 text-sm leading-relaxed text-[#6e6e73]">Corps en matière issue de textile recyclé. Simulation de personnalisation 2D.</p></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">02 — Couleur</p><PenColorSelector value={state.penColor} onChange={selectColor}/></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">03 — Logo</p><LogoUploader logo={state.uploadedLogo} onChange={uploadedLogo => patch({ uploadedLogo })}/></section>
-        <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">04 — Marquage</p><div className="grid gap-6"><MarkingLocationSelector value={state.markingLocation} onChange={markingLocation => patch({ markingLocation, editingLocation: markingLocation === "both" ? state.editingLocation : markingLocation })}/><LogoTransformControls scale={state.logoTransforms[state.editingLocation].scale} rotation={state.logoTransforms[state.editingLocation].rotation} editingLocation={state.editingLocation} showTargetSelector={state.markingLocation === "both"} preserveRatio={state.preserveRatio} markingColor={state.markingColor} onEditingLocationChange={editingLocation => patch({ editingLocation })} onScaleChange={scale => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], scale } } })} onRotationChange={rotation => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], rotation } } })} onPositionChange={position => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], position } } })} onPreserveRatioChange={preserveRatio => patch({ preserveRatio })} onMarkingColorChange={markingColor => patch({ markingColor })}/></div></section>
+        <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">04 — Marquage</p><div className="grid gap-6"><MarkingLocationSelector value={state.markingLocation} onChange={markingLocation => patch({ markingLocation, editingLocation: markingLocation })}/><MarkingColorCountSelector value={state.markingColorCount} onChange={markingColorCount => patch({ markingColorCount })}/><LogoTransformControls scale={state.logoTransforms[state.editingLocation].scale} rotation={state.logoTransforms[state.editingLocation].rotation} editingLocation={state.editingLocation} showTargetSelector={false} preserveRatio={state.preserveRatio} markingColor={state.markingColor} onEditingLocationChange={editingLocation => patch({ editingLocation })} onScaleChange={scale => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], scale } } })} onRotationChange={rotation => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], rotation } } })} onPositionChange={position => patch({ logoTransforms: { ...state.logoTransforms, [state.editingLocation]: { ...state.logoTransforms[state.editingLocation], position } } })} onPreserveRatioChange={preserveRatio => patch({ preserveRatio })} onMarkingColorChange={markingColor => patch({ markingColor })}/></div></section>
         <section className="rounded-[1.5rem] border border-[#dedbd4] bg-white p-5"><p className="eyebrow mb-4">05 — Quantité</p><QuantitySelector value={state.quantity} onChange={quantity => patch({ quantity })}/></section>
+        <PricingSummary quantity={state.quantity} markingLocation={state.markingLocation} colorCount={state.markingColorCount}/>
       </motion.div>
     </div>
     <section className="border-t border-[#dedbd4] bg-white py-16">
       <div className="container grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
-        <div><p className="eyebrow">06 — Demande de devis</p><h2 className="mt-5 text-4xl font-semibold tracking-[-.04em] md:text-5xl">Transformons votre simulation en projet.</h2><p className="copy mt-6">Votre fichier et vos choix seront vérifiés par notre équipe avant l’établissement du devis et du BAT.</p></div>
+        <div><p className="eyebrow">07 — Demande de devis</p><h2 className="mt-5 text-4xl font-semibold tracking-[-.04em] md:text-5xl">Transformons votre simulation en projet.</h2><p className="copy mt-6">Votre fichier et vos choix seront vérifiés par notre équipe avant l’établissement du devis et du BAT.</p></div>
         <QuoteRequestForm state={state} onCustomerChange={customerDetails => patch({ customerDetails })} createPreview={createPreview}/>
       </div>
     </section>
