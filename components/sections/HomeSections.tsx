@@ -63,7 +63,7 @@ export function ManifestoSection() { return <section id="decouvrir" className="s
 const pillars = [
   [Recycle, "Textile recyclé", "Le corps utilise une matière issue de textiles industriels recyclés, fortement chargés en polyester."],
   [Sparkles, "Sans pétrole ajouté pour le corps", "Une matière existante remplace le plastique vierge pour cette partie du produit."],
-  [Factory, "Fabrication européenne", "La matière est développée en France et le corps du stylo est injecté en Italie."],
+  [Factory, "Fabrication européenne", "La matière est transformée en France. Un1qpen est ensuite injecté, assemblé et personnalisé en Italie."],
   [Fingerprint, "Une histoire tangible", "Un support de communication concret, tactile et immédiatement compréhensible."],
 ];
 export function ValuePillars() { return <section className="section bg-white"><Container><SectionHeading eyebrow="La proposition" title="Plus qu’un stylo recyclé : une histoire à transmettre."/><div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">{pillars.map(([Icon,title,text],i)=><AnimatedReveal delay={i*.06} key={String(title)}><Card className="h-full"><Icon size={24}/><h3 className="mt-8 text-xl font-semibold">{String(title)}</h3><p className="mt-4 leading-relaxed text-[#555b60]">{String(text)}</p></Card></AnimatedReveal>)}</div></Container></section>; }
