@@ -89,7 +89,7 @@ function LogoLayer({ state, zone, onPositionChange }: Props & { zone: PrintZone 
 export function PenPreview({ state, onPositionChange, onViewChange }: Props) {
   const view = viewOptions.find(option => option.id === state.activeView) ?? viewOptions[0];
   const zones = printZones[state.penColor][state.activeView];
-  const locations = [state.markingLocation] as const;
+  const locations = state.markingLocation === "both" ? ["clip", "body"] as const : [state.markingLocation] as const;
   const [autoRotate, setAutoRotate] = useState(false);
   const spinStart = useRef<{ x: number; index: number } | null>(null);
 

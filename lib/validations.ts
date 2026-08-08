@@ -18,8 +18,7 @@ export type ContactInput = z.infer<typeof contactSchema>;
 export const quoteConfigurationSchema = z.object({
   penColor: z.enum(["white", "warmGrey", "black"]),
   markingColor: z.enum(["white", "warmGrey", "black"]),
-  markingLocation: z.enum(["clip", "body"]),
-  markingColorCount: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+  markingLocation: z.enum(["clip", "body", "both"]),
   activeView: z.enum(["view1", "view2", "view3", "view4", "view5", "view6"]),
   logoTransforms: z.object({
     clip: z.object({
@@ -34,7 +33,7 @@ export const quoteConfigurationSchema = z.object({
     }),
   }),
   preserveRatio: z.boolean(),
-  quantity: z.union([z.literal(1000), z.literal(2500), z.literal(5000), z.literal(10000), z.literal(50000)]),
+  quantity: z.number().int().min(500, "La quantité minimale est de 500 pièces."),
   customerDetails: z.object({
     company: z.string().min(2, "Indiquez votre société."),
     firstName: z.string().min(2, "Indiquez votre prénom."),
