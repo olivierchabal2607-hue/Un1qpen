@@ -16,7 +16,7 @@ const initial = {
     clip: { scale: 1, rotation: 0, position: { x: .5, y: .5 } },
     body: { scale: 1, rotation: 0, position: { x: .5, y: .5 } },
   },
-  editingLocation: "clip", preserveRatio: true, quantity: 500,
+  editingLocation: "clip", preserveRatio: true, quantity: 1000,
   customerDetails: { company: "", firstName: "", lastName: "", email: "", phone: "", deliveryDate: "", comment: "", consent: false },
 };
 
@@ -41,8 +41,8 @@ test("refuse un logo supérieur à 10 Mo", () => {
   assert.match(result.error, /10 Mo/);
 });
 
-test("refuse une quantité inférieure à 500", () => {
-  assert.match(validateQuoteDraft({ ...initial, quantity: 499 }), /500/);
+test("refuse une quantité inférieure à 1 000", () => {
+  assert.match(validateQuoteDraft({ ...initial, quantity: 999 }), /1 000/);
 });
 
 test("valide un formulaire de devis complet", () => {

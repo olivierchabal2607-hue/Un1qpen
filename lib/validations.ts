@@ -33,7 +33,7 @@ export const quoteConfigurationSchema = z.object({
     }),
   }),
   preserveRatio: z.boolean(),
-  quantity: z.number().int().min(500, "La quantité minimale est de 500 pièces."),
+  quantity: z.number().int().min(1000, "La quantité minimale est de 1 000 pièces."),
   customerDetails: z.object({
     company: z.string().min(2, "Indiquez votre société."),
     firstName: z.string().min(2, "Indiquez votre prénom."),

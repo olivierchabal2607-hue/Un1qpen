@@ -148,9 +148,9 @@ export const initialConfiguratorState: ConfiguratorState = {
   },
   editingLocation: "clip",
   preserveRatio: true,
-  quantity: 500,
+  quantity: 1000,
   customerDetails: initialCustomerDetails,
 };
 
-export const quickQuantities = [500, 1000, 2500, 5000, 10000];
+export const quickQuantities = [1000, 2500, 5000, 10000];
 export const CONFIGURATOR_STORAGE_KEY = "un1qpen-configurator-v1";
