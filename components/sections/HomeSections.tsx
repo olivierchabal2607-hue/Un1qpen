@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Factory, Fingerprint, Globe2, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Smile, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Diamond, Factory, Fingerprint, Globe2, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Smile, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/animations/AnimatedReveal";
 import { Button, Card, Container, SectionHeading } from "@/components/ui";
@@ -33,6 +33,7 @@ export function HeroSection() {
     [Globe2, "Impact environnemental XXS", "Bilan carbone ultra-faible", null],
     [Lightbulb, "L’objet média", "Qui répond à toutes vos exigences RSE !", null],
     [Smile, "Une expérience", "d’écriture XXL", null],
+    [Diamond, "Simplement élégant", "Sobre, premium et mémorable.", null],
   ] as const;
   return <section className="hero-home relative flex min-h-[100svh] items-center overflow-hidden bg-[#f7f6f3] pb-7 pt-24 text-[#1d1d1f]">
     <div className="hero-visual absolute inset-y-[5%] right-0 w-[92%] bg-[#f7f6f3]">
@@ -186,6 +187,8 @@ export function EuropeOriginSection() {
 }
 
 export function ProductShowcase() { return <section className="section bg-white"><Container><div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"><ProductVisual className="overflow-hidden rounded-[2rem] border border-black/5 bg-[#eeeeef] shadow-[0_28px_80px_rgba(0,0,0,.10)] md:rounded-[2.5rem]"><Image src="/images/un1qpen-color-warm-grey.png" alt="Vue rapprochée en perspective du stylo Un1qpen Warm Grey et de son clip transparent" width={1774} height={887} sizes="(max-width: 1024px) 100vw, 50vw" className="h-full min-h-[280px] w-full object-cover md:min-h-[420px]"/></ProductVisual><div><SectionHeading eyebrow="Le produit" title="Un objet utile, pensé pour être vu."/><ul className="grid gap-4">{productFeatures.map(f=><li className="flex gap-3" key={f}><Check className="mt-1 shrink-0 text-[#17486a]" size={18}/>{f}</li>)}</ul><p className="copy mt-6 text-sm">Le clip et les éléments techniques ne sont actuellement pas fabriqués dans la matière textile recyclée.</p><div className="mt-8 flex flex-wrap gap-3"><Button href="/documents/fiche-technique-un1qpen.pdf">Télécharger la fiche technique</Button><Button href="/contact?type=sample" variant="ghost">Recevoir un échantillon</Button></div></div></div></Container></section>; }
+
+export function EleganceStatement() { return <section className="overflow-hidden bg-[#f7f6f3] py-24 md:py-36"><Container><AnimatedReveal><p className="text-center font-[var(--font-serif)] text-[clamp(3rem,7vw,7.5rem)] leading-[.95] tracking-[-.045em]">Un1qpen&nbsp;:<br className="sm:hidden"/> <span className="text-[#17486a]">simplement élégant.</span></p></AnimatedReveal></Container></section>; }
 
 export function MaterialTouchSection() { return <section className="textile-surface section bg-[linear-gradient(135deg,#eef3f6,#cbdbe4)] text-[#1d1d1f]"><Container><div className="grid gap-12 lg:grid-cols-[1.4fr_.6fr]"><h2 className="h2">Un plaisir d’écrire XXL.<br/><span className="text-[#17486a]">Une pollution XXS.</span></h2><div><p className="text-lg leading-relaxed text-[#53606a]">La matière épouse finement les détails du moule et donne au corps du stylo un aspect doux et soyeux, différent des plastiques classiques.</p><p className="mt-5 text-lg leading-relaxed text-[#53606a]">Sans oublier une expérience d’écriture <span className="whitespace-nowrap">«&nbsp;waouh&nbsp;»</span>, grâce à une recharge à pointe Large qui offre une fluidité rare&nbsp;!</p></div></div></Container></section>; }
 
