@@ -1,4 +1,5 @@
 export const navigation = [
+  { label: "Accueil", href: "/" },
   { label: "L’histoire", href: "/histoire" },
   { label: "La matière", href: "/matiere" },
   { label: "Le produit", href: "/produit" },
