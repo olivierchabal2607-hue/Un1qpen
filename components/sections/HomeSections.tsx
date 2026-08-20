@@ -201,7 +201,7 @@ export function BrandVisionSection() {
         <div className="mt-7 max-w-2xl space-y-7">
           <p className="copy text-white/78">Un1qpen est la première démonstration d’une volonté plus large : donner une nouvelle fonction à des matières issues de textiles recyclés et les transformer en objets utiles, désirables et personnalisables.</p>
           <div className="space-y-7">
-            <p className="copy text-white/78">Le projet Un1q’Objects a pour ambition de poursuivre l’innovation avec comme objectif majeur : préserver notre planète !</p>
+            <p className="copy text-white/78">Le projet Un1q’Objects a pour ambition de poursuivre l’innovation avec comme objectif majeur : moins polluer !</p>
             <div>
               <p className="copy text-white/78">Des idées sans pétrole ajouté !</p>
               <p className="copy text-white/78">Bientôt de nouveaux projets verront le jour…</p>
