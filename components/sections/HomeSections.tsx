@@ -203,7 +203,7 @@ export function BrandVisionSection() {
           <div className="space-y-7">
             <p className="copy text-white/78">Le projet Un1q’Objects a pour ambition de poursuivre l’innovation avec comme objectif majeur : préserver notre planète !</p>
             <div>
-              <p className="copy text-white/78">Des idées, pas de pétrole !</p>
+              <p className="copy text-white/78">Des idées sans pétrole ajouté !</p>
               <p className="copy text-white/78">Bientôt de nouveaux projets verront le jour…</p>
               <p className="copy text-white/78">Parce que plus de solutions, c’est moins de pollution : restez connectés !</p>
             </div>
