@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Diamond, Factory, Fingerprint, Globe2, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Smile, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Diamond, Factory, Fingerprint, Lightbulb, MapPin, Milk, PenLine, Recycle, Shirt, Smile, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/animations/AnimatedReveal";
 import { Button, Card, Container, SectionHeading } from "@/components/ui";
@@ -30,7 +30,6 @@ export function HeroSection() {
     [Sparkles, "Sans pétrole ajouté", "Pour le corps du stylo", null],
     [MapPin, "Circuit ultra-court", "100 % made in Europe", null],
     [PenLine, "Vos idées", "Personnalisables à l’infini", null],
-    [Globe2, "Impact environnemental XXS", "Bilan carbone ultra-faible", null],
     [Lightbulb, "L’objet média", "Qui répond à toutes vos exigences RSE !", null],
     [Smile, "Une expérience", "d’écriture XXL", null],
     [Diamond, "Simplement élégant", "Sobre, premium et mémorable.", null],
